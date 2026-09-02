@@ -1267,8 +1267,13 @@ address { font-style: normal; }
    ========================================================= */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+@media (min-width: 1200px) {
+  .team-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 .doc-team-card {
   background: #ffffff;
@@ -1320,6 +1325,76 @@ address { font-style: normal; }
 .doc-team-card__body .link-arrow {
   margin-top: auto;
 }
+
+/* =========================================================
+   LANDMARK SURGICAL CASES & MILESTONES
+   ========================================================= */
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.milestone-card {
+  background: #ffffff;
+  border: 1px solid var(--med-slate);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s var(--ease);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.milestone-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--med-blue);
+}
+.milestone-card__img {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: var(--med-ice);
+}
+.milestone-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.milestone-card:hover .milestone-card__img img { transform: scale(1.05); }
+.milestone-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(10, 54, 99, 0.92);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+}
+.milestone-card__body {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.milestone-card__body h3 {
+  font-size: 1.05rem;
+  color: var(--med-navy);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+.milestone-card__body p {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+.milestone-card__body .link-arrow { margin-top: auto; }
 
 /* =========================================================
    VIDEO LOGS & DOCTALKS
@@ -1820,41 +1895,341 @@ address { font-style: normal; }
 .to-top:hover { background: var(--med-blue); }
 .to-top svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* Responsive Breakpoints */
+/* =========================================================
+   ROBUST RESPONSIVE BREAKPOINTS (320px - 1180px)
+   ========================================================= */
+
+/* Prevent any horizontal overflow at viewport root */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Tablet & Smaller Desktops (<= 1180px) */
 @media (max-width: 1180px) {
-  .nav { display: none; }
+  .nav { display: none !important; }
   .nav-toggle { display: flex; }
-  .topbar__list--secondary { display: none; }
+  .topbar__list--secondary { display: none !important; }
   .quick-triage__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .team-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* Tablets (<= 860px) */
 @media (max-width: 860px) {
-  .hero-slider, .hero-slider__track { min-height: 520px; }
-  .hero-slide__content { padding: 36px 0 54px; }
+  .topbar { height: auto; padding: 6px 0; }
+  .topbar .container { justify-content: center; }
+  .topbar__social { display: none !important; }
+  
+  .hero-slider, .hero-slider__track { min-height: 500px; }
+  .hero-slide__content { padding: 32px 0 48px; }
+  
   .split, .split--wide { grid-template-columns: 1fr; }
   .split--rev > *:first-child { order: 1; }
   .split--rev > *:last-child { order: 2; }
-  .doc-box { grid-template-columns: 1fr; }
-  .doc-box__frame img { height: 360px; }
+  
+  .doc-box { grid-template-columns: 1fr; gap: 24px; }
+  .doc-box__frame img { height: 340px; }
+  
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
   .testi-track > * { flex: 0 0 calc(50% - 10px); }
+  
   .cta-banner__grid { grid-template-columns: 1fr; }
   .cta-banner__actions { justify-content: flex-start; }
 }
 
+/* Mobile Devices (<= 600px) */
 @media (max-width: 600px) {
-  .hero-slider, .hero-slider__track { min-height: 540px; }
-  .hero-slide__content { padding: 28px 0 64px; }
-  .hero-slide__title { font-size: 1.7rem; }
-  .hero-slider__dots { bottom: 14px; }
-  .hero-slider__nav { display: none; }
-  .quick-triage__grid { grid-template-columns: 1fr; }
-  .grid-2, .grid-3, .grid-4, .grid-5, .team-grid { grid-template-columns: 1fr; }
-  .testi-track > * { flex: 0 0 100%; }
-  .doc-highlights { grid-template-columns: 1fr; }
-  .brand__tag { display: none; }
-  .footer__grid { grid-template-columns: 1fr; }
-  .hospital-loc-card__actions { grid-template-columns: 1fr; }
+  :root {
+    --header-h: 60px;
+  }
+  
+  .container {
+    padding: 0 14px;
+  }
+  
+  /* Topbar */
+  .topbar {
+    font-size: 0.72rem;
+    padding: 4px 0;
+  }
+  .topbar__badge-emerg {
+    font-size: 0.65rem;
+    padding: 1px 5px;
+  }
+  
+  /* Header */
+  .header__inner {
+    height: 60px;
+    gap: 8px;
+  }
+  .brand img {
+    height: 32px;
+  }
+  .brand__title {
+    font-size: 1rem;
+  }
+  .brand__tag {
+    display: none !important;
+  }
+  .header__cta .btn--primary {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+  .nav-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Hero Slider Mobile Polish */
+  .hero-slider, .hero-slider__track {
+    min-height: 480px;
+    height: auto;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+  }
+  .hero-slide__overlay {
+    background: linear-gradient(180deg, rgba(6, 32, 60, 0.94) 0%, rgba(6, 32, 60, 0.88) 100%);
+  }
+  .hero-slide__content {
+    padding: 24px 0 52px;
+  }
+  .hero-slide__badge {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+  .hero-slide__title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero-slide__desc {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .hero-slide__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .hero-slide__actions .btn {
+    width: 100%;
+    padding: 11px 16px;
+    font-size: 0.88rem;
+  }
+  .hero-slide__features {
+    display: none !important;
+  }
+  .hero-slider__nav {
+    display: none !important;
+  }
+  .hero-slider__dots {
+    bottom: 12px;
+  }
+
+  /* Quick Triage Grid */
+  .quick-triage {
+    padding: 24px 0;
+  }
+  .quick-triage__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .triage-card {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  /* Accreditations Strip */
+  .cred-strip {
+    padding: 18px 0;
+  }
+  .cred-strip__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cred-strip__logos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .cred-strip__item {
+    justify-content: center;
+    padding: 6px 10px;
+  }
+  .cred-strip__item img {
+    height: 22px;
+  }
+  .cred-strip__item span {
+    font-size: 0.74rem;
+  }
+
+  /* Doctor Spotlight */
+  .doc-box {
+    padding: 20px 16px;
+    border-radius: var(--radius-sm);
+  }
+  .doc-box__frame img {
+    height: 280px;
+  }
+  .doc-box__badge {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 8px 12px;
+  }
+  .doc-box__badge strong {
+    font-size: 0.82rem;
+  }
+  .doc-box__badge span {
+    font-size: 0.72rem;
+  }
+  .doc-box__content h2 {
+    font-size: 1.55rem;
+  }
+  .doc-highlights {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .doc-quote {
+    font-size: 0.86rem;
+    padding: 10px 12px;
+  }
+
+  /* Section Spacing & Headers */
+  .section {
+    padding: 44px 0;
+  }
+  .section-head {
+    margin-bottom: 24px;
+  }
+  .section-head h2.h2,
+  .section-head h2 {
+    font-size: 1.55rem;
+  }
+  .section-head--row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .section-head--row .btn {
+    width: 100%;
+  }
+
+  /* Grids */
+  .grid-2, .grid-3, .grid-4, .grid-5, .team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Department Cards */
+  .dept-card__img {
+    height: 180px;
+  }
+  .dept-card__body {
+    padding: 18px 16px;
+  }
+
+  /* Clinical Showcase */
+  .clinical-box {
+    padding: 20px 16px;
+  }
+  .clinical-box h3 {
+    font-size: 1.3rem;
+  }
+  .clinical-tags {
+    gap: 6px;
+  }
+  .clinical-tag {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  /* Video Grid */
+  .video-card--lg {
+    aspect-ratio: 16/10;
+  }
+  .video-card__play {
+    width: 40px;
+    height: 40px;
+  }
+  .video-card__play svg {
+    width: 14px;
+    height: 14px;
+  }
+  .video-card__title {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+
+  /* Testimonials */
+  .testi-track > * {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+  .testi-card {
+    padding: 20px 16px;
+  }
+
+  /* Hospital Locations */
+  .hospital-loc-card {
+    padding: 20px 16px;
+  }
+  .hospital-loc-card__actions {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* CTA Banner */
+  .cta-banner {
+    padding: 28px 18px;
+  }
+  .cta-banner h2 {
+    font-size: 1.45rem;
+  }
+  .cta-banner__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cta-banner__actions .btn {
+    width: 100%;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 44px 0 20px;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Ultra Small Mobile (<= 380px) */
+@media (max-width: 380px) {
+  .brand__title {
+    font-size: 0.88rem;
+  }
+  .header__cta .btn--primary {
+    padding: 6px 8px;
+    font-size: 0.72rem;
+  }
+  .hero-slide__title {
+    font-size: 1.35rem;
+  }
 }
