@@ -210,8 +210,8 @@ address{font-style:normal}
 .header.is-scrolled{border-color:var(--line-2);box-shadow:0 8px 30px rgba(21,23,27,.06);background:rgba(250,247,241,.96)}
 .header__inner{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative}
 .nav>li.has-mega{position:static}
-.brand{display:flex;align-items:center;gap:14px;flex:none}
-.brand img{height:58px;width:auto}
+.brand{display:flex;align-items:center;gap:14px;flex:none;line-height:1}
+.brand img{height:50px;width:auto;display:block;object-fit:contain}
 .brand__text{display:none}
 .nav{display:flex;align-items:center;gap:4px}
 .nav>li{position:relative}
