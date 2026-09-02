@@ -1,11 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/firstcommit",
-      "destination": "/firstcommit/index.html"
-    },
+      "destination": "/firstcommit/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
     {
       "source": "/firstcommit/",
       "destination": "/firstcommit/index.html"
