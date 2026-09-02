@@ -1,17 +1,3 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/firstcommit",
-      "destination": "/firstcommit/",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/firstcommit/",
-      "destination": "/firstcommit/index.html"
-    }
-  ]
+  "cleanUrls": true
 }
