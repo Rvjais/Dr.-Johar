@@ -234,4 +234,22 @@
       if (empty) empty.style.display = n ? 'none' : 'block';
     });
   }
+
+  /* ---------- Interactive Animated Cards: 3D Tilt & Micro-interactions ---------- */
+  const cards = $$('.post-card, .loc-card, .cat-tile, .tcard');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rx = ((y - cy) / cy) * -3.5;
+      const ry = ((x - cx) / cx) * 3.5;
+      card.style.transform = `perspective(800px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-8px) scale(1.015)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 })();
