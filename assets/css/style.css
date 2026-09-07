@@ -225,6 +225,9 @@ address{font-style:normal}
 .header__cta{display:flex;align-items:center;gap:12px}
 .header__phone{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;color:var(--ink)}
 .header__phone .icon{width:18px;height:18px;stroke:var(--gold)}
+.header__cta{display:flex;align-items:center;gap:14px;flex:none;flex-shrink:0;white-space:nowrap}
+.header__phone{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;color:var(--ink);white-space:nowrap!important;flex:none!important;flex-shrink:0!important}
+.header__phone .icon{width:18px;height:18px;stroke:var(--gold);flex:none}
 .nav-toggle{display:none;width:44px;height:44px;border-radius:12px;place-items:center;border:1px solid var(--line)}
 .nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);margin:4px auto;transition:.3s}
 
@@ -908,6 +911,19 @@ h1, h2, h3, h4, h5, p, a, span, address, blockquote, cite {
 
 @media (max-width: 1380px) {
   .header__phone { display: none; }
+@media (max-width: 1440px) {
+  .nav { gap: 2px; }
+  .nav > li > a, .nav > li > button {
+    padding: 10px 10px;
+    font-size: .86rem;
+  }
+  .header__inner { gap: 14px; }
+  .header__cta { gap: 10px; }
+  .header__cta .btn { padding: 10px 18px; font-size: .88rem; }
+}
+
+@media (max-width: 1280px) {
+  .header__phone { display: none !important; }
 }
 
 @media (max-width: 1180px) {
