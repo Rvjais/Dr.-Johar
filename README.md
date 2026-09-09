@@ -16,10 +16,12 @@ A complete, modern redesign of **theaesthetic.in** (Dr. Manoj K Johar, Noida). S
 | `blog.html`, `blog/*.html` | Blog — 6 original articles from the old site + 6 new ones |
 | `news.html`, `news/*.html` | Healthcare news — 26 items carried over from the old site |
 | `disclaimer.html`, `privacy.html`, `sitemap.html`, `404.html`, `sitemap.xml`, `robots.txt` | Legal / SEO |
-| `assets/css/style.css` | The whole design system (one file) |
-| `assets/js/main.js` | Navigation, mega menu, mobile drawer, animations, sliders, accordions, lightbox, forms |
+| `assets/css/style.css` | Original component foundation and shared utilities |
+| `assets/css/studio.css` | Studio visual direction, responsive layouts and redesigned page components |
+| `assets/js/main.js` | Navigation, mobile drawer, scroll reveals, sliders, accordions, lightbox and forms |
+| `assets/js/studio.js` | Editorial tabs, treatment filters, form enhancements and subtle depth effects |
 | `assets/img/` | Logo (dark + light), team photos, affiliation logos, video thumbnails, stock photography |
-| `_build/` | Generator: `data.py` (all content) + `build.py` (templates). **Not needed for hosting** — you can delete it or keep it for editing. |
+| `_build/` | Content generator plus the shared Studio header, footer and homepage templates. **Not needed for hosting** — keep it if you plan to edit and rebuild the site. |
 
 **102 HTML pages** are generated. Every internal link and asset reference has been verified (0 broken).
 
@@ -29,7 +31,9 @@ All text lives in `_build/data.py` — phones, locations, team bios, testimonial
 
 1. Edit `_build/data.py`
 2. Run `python _build/build.py` from this folder (needs Python 3 — no other dependencies)
-3. All pages regenerate in place.
+3. All pages regenerate in place and the Studio design is applied automatically.
+
+After editing only the shared Studio templates, run `python _build/studio.py` to apply them across the existing pages without rebuilding the clinical copy.
 
 To edit a single page by hand instead, just open its `.html` — the markup is clean and readable.
 
@@ -39,9 +43,11 @@ Every form (appointments, urgent, virtual, query/reports, career, contact, testi
 
 ## Design notes
 
-- Palette: ivory `#faf7f1`, ink `#15171b`, champagne gold `#b08a49` — pulled from the existing JPSG logo.
-- Type: Cormorant Garamond (display) + Manrope (body) via Google Fonts, with system fallbacks so it still renders offline.
-- Fully responsive (desktop / tablet / mobile), sticky glass header, mega menu, mobile drawer, sticky "Call / Book" bar on phones, floating WhatsApp button, scroll-reveal animations, accessible focus states, print styles.
+- Direction: contemporary specialist clinic — soft ivory, deep charcoal, muted rose and restrained warm-metal accents.
+- Type: Instrument Serif (display) + DM Sans (body) via Google Fonts, with system fallbacks so the site remains usable offline.
+- The homepage is a fully custom editorial composition with treatment discovery, surgeon story, care journey, specialists, patient voices, journal, FAQs and location explorer.
+- Every interior page uses the same redesigned navigation, cinematic page introduction, cards, forms and footer while retaining its clinical information.
+- Fully responsive across desktop, tablet and mobile, with an accessible mega menu and drawer, sticky phone actions, treatment filtering, keyboard-friendly tabs, scroll reveals, focus states, reduced-motion support and print styles.
 - SEO: unique `<title>`/description per page, Open Graph tags, `sitemap.xml`, `robots.txt`, breadcrumbs.
 
 ## Please confirm / replace before going live

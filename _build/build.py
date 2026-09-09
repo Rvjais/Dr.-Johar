@@ -5,6 +5,7 @@ Run:  python _build/build.py   (from the Dr.johar_renew folder)
 import os, re, json, html, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from data import *  # noqa
+from studio import apply_design
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1271,6 +1272,8 @@ def build_404():
 
 # ------------------------------------------------------------------ MAIN
 def write(path, content):
+    if path.endswith('.html'):
+        content = apply_design(content, path)
     full = os.path.join(ROOT_DIR, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:

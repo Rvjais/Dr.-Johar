@@ -30,7 +30,7 @@
     document.body.classList.toggle('motion-paused', paused);
     document.documentElement.classList.toggle('motion-paused', paused);
     motionButton.textContent = paused ? 'Motion off' : 'Motion on';
-    motionButton.setAttribute('aria-label', 'Pause animations');
+    motionButton.setAttribute('aria-label', paused ? 'Resume animations' : 'Pause animations');
     motionButton.setAttribute('aria-pressed', String(paused));
     if (paused) $$('.reveal, .reveal-stagger').forEach(el => el.classList.add('is-visible'));
     document.dispatchEvent(new Event('kratam:motionchange'));
