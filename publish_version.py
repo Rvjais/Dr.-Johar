@@ -7,7 +7,6 @@ import shutil
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 VERSIONS_FILE = os.path.join(BASE_DIR, 'versions.json')
-COMMITS_DIR = os.path.join(BASE_DIR, 'Dr_Johar_Commits')
 INDEX_FILE = os.path.join(BASE_DIR, 'index.html')
 VERCEL_FILE = os.path.join(BASE_DIR, 'vercel.json')
 
@@ -21,30 +20,7 @@ def save_versions(versions):
     with open(VERSIONS_FILE, 'w', encoding='utf-8') as f:
         json.dump(versions, f, indent=2)
 
-def update_vercel_json(versions):
-    latest_commit = None
-    for v in versions:
-        if v.get('is_latest'):
-            latest_commit = v['commit']
-            break
-    if not latest_commit and versions:
-        latest_commit = versions[0]['commit']
-
-    rewrites = []
-    if latest_commit:
-        rewrites.append({'source': '/latest', 'destination': f'/Dr_Johar_Commits/{latest_commit}/'})
-        rewrites.append({'source': '/latest/:path*', 'destination': f'/Dr_Johar_Commits/{latest_commit}/:path*'})
-
-    for v in versions:
-        sh = v.get('short_hash')
-        full = v.get('commit')
-        if sh and full:
-            rewrites.append({'source': f'/{sh}', 'destination': f'/Dr_Johar_Commits/{full}/'})
-            rewrites.append({'source': f'/{sh}/:path*', 'destination': f'/Dr_Johar_Commits/{full}/:path*'})
-
-    rewrites.append({'source': '/:commit([a-f0-9]{40})', 'destination': '/Dr_Johar_Commits/:commit/'})
-    rewrites.append({'source': '/:commit([a-f0-9]{40})/:path*', 'destination': '/Dr_Johar_Commits/:commit/:path*'})
-
+def update_vercel_json():
     config = {
         'version': 2,
         'cleanUrls': True,
@@ -56,13 +32,11 @@ def update_vercel_json(versions):
                     {'key': 'Cache-Control', 'value': 'public, max-age=0, must-revalidate'}
                 ]
             }
-        ],
-        'rewrites': rewrites
+        ]
     }
-
     with open(VERCEL_FILE, 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=2)
-    print('[+] Updated vercel.json with version rewrites.')
+    print('[+] Updated vercel.json.')
 
 def build_portal_html(versions):
     cards_html = []
@@ -449,7 +423,7 @@ def main():
     versions = load_versions()
 
     if args.refresh or not args.message:
-        update_vercel_json(versions)
+        update_vercel_json()
         build_portal_html(versions)
         print('[OK] System refreshed successfully.')
         return
@@ -464,19 +438,26 @@ def main():
         commit_sha = hashlib.sha1((title + str(datetime.datetime.now())).encode()).hexdigest()
 
     short_hash = commit_sha[:7]
-    dest_dir = os.path.join(COMMITS_DIR, commit_sha)
+    dest_dir = os.path.join(BASE_DIR, commit_sha)
+    short_dest_dir = os.path.join(BASE_DIR, short_hash)
+    latest_dest_dir = os.path.join(BASE_DIR, 'latest')
+
     os.makedirs(dest_dir, exist_ok=True)
+    os.makedirs(short_dest_dir, exist_ok=True)
+    os.makedirs(latest_dest_dir, exist_ok=True)
 
     src_dir = args.source
     if not src_dir:
         for v in versions:
             if v.get('is_latest'):
-                src_dir = os.path.join(COMMITS_DIR, v['commit'])
+                src_dir = os.path.join(BASE_DIR, v['commit'])
                 break
 
-    if src_dir and os.path.exists(src_dir) and src_dir != dest_dir:
-        print(f'[+] Copying snapshot from {src_dir} to {dest_dir}...')
+    if src_dir and os.path.exists(src_dir):
+        print(f'[+] Copying snapshot from {src_dir} to commit folders...')
         shutil.copytree(src_dir, dest_dir, dirs_exist_ok=True)
+        shutil.copytree(src_dir, short_dest_dir, dirs_exist_ok=True)
+        shutil.copytree(src_dir, latest_dest_dir, dirs_exist_ok=True)
 
     for v in versions:
         v['is_latest'] = False
@@ -492,7 +473,7 @@ def main():
     }
     versions.insert(0, new_entry)
     save_versions(versions)
-    update_vercel_json(versions)
+    update_vercel_json()
     build_portal_html(versions)
     print(f'[OK] Published version {short_hash} ({commit_sha}).')
 

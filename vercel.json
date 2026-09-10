@@ -12,39 +12,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/latest",
-      "destination": "/Dr_Johar_Commits/6ce732e63260f60c0203ef7caa72248ad6fedf5c/"
-    },
-    {
-      "source": "/latest/:path*",
-      "destination": "/Dr_Johar_Commits/6ce732e63260f60c0203ef7caa72248ad6fedf5c/:path*"
-    },
-    {
-      "source": "/6ce732e",
-      "destination": "/Dr_Johar_Commits/6ce732e63260f60c0203ef7caa72248ad6fedf5c/"
-    },
-    {
-      "source": "/6ce732e/:path*",
-      "destination": "/Dr_Johar_Commits/6ce732e63260f60c0203ef7caa72248ad6fedf5c/:path*"
-    },
-    {
-      "source": "/6609d4e",
-      "destination": "/Dr_Johar_Commits/6609d4ea1bcf45512772c0bd37a906c74a4ef3b6/"
-    },
-    {
-      "source": "/6609d4e/:path*",
-      "destination": "/Dr_Johar_Commits/6609d4ea1bcf45512772c0bd37a906c74a4ef3b6/:path*"
-    },
-    {
-      "source": "/:commit([a-f0-9]{40})",
-      "destination": "/Dr_Johar_Commits/:commit/"
-    },
-    {
-      "source": "/:commit([a-f0-9]{40})/:path*",
-      "destination": "/Dr_Johar_Commits/:commit/:path*"
-    }
   ]
 }
