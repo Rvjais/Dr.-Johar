@@ -1,0 +1,20 @@
+[
+  {
+    "commit": "6ce732e63260f60c0203ef7caa72248ad6fedf5c",
+    "short_hash": "6ce732e",
+    "title": "Kratam Hospital Rebrand & Mobile Responsive",
+    "description": "Full mobile responsiveness overhaul, single-line phone layout, Kratam branding updates, and ?v=2.0 asset cache busters.",
+    "branch": "first-commit",
+    "date": "2026-09-07",
+    "is_latest": true
+  },
+  {
+    "commit": "6609d4ea1bcf45512772c0bd37a906c74a4ef3b6",
+    "short_hash": "6609d4e",
+    "title": "GPT-1 Initial Design",
+    "description": "Original initial GPT-1 design commit before rebrand and mobile responsive changes.",
+    "branch": "main",
+    "date": "2026-09-02",
+    "is_latest": false
+  }
+]
