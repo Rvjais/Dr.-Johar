@@ -1,6 +1,20 @@
 /**
  * Kratam Hospital – GSAP Premium Animation Engine (Ivory & Champagne Gold)
- * Cinematic, GSAP-powered animations with ScrollTrigger and Lenis smooth scroll.
+ * Comprehensive, high-end animation system featuring:
+ * - Lenis smooth inertia scroll
+ * - Dynamic scroll progress line
+ * - Marquee scroll velocity acceleration
+ * - Hero sequence with rotating rings and "Beauty" background text parallax
+ * - Split-line typography mask reveals with champagne shimmer
+ * - 3D Category tiles with specular glare tracking
+ * - Dual dark section reveals with alternating treatment links
+ * - 3D Team cards with perspective tilt and photo zoom
+ * - Magnetic video play button with radar pulse
+ * - Sequential golden star twinkle on testimonials
+ * - Location cards 3D entrance
+ * - Golden particle sparkle explosion on button click
+ * - Custom champagne magnetic follower cursor
+ * - Ambient drifting champagne glow orbs
  */
 (function () {
   'use strict';
@@ -69,7 +83,27 @@
   }
 
   /* ================================================================
-     1. HERO CINEMATIC ENTRANCE
+     1. SCROLL PROGRESS BAR (GOLD GLOW)
+  ================================================================ */
+  function scrollProgressBar() {
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress-line';
+    document.body.appendChild(bar);
+
+    gsap.to(bar, {
+      scaleX: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.3
+      }
+    });
+  }
+
+  /* ================================================================
+     2. HERO CINEMATIC ENTRANCE
   ================================================================ */
   function heroEntrance() {
     var hero = document.querySelector('.hero');
@@ -81,7 +115,7 @@
     var bgText = hero.querySelector('.hero__bg-text');
     if (bgText) {
       gsap.to(bgText, {
-        xPercent: 25,
+        xPercent: 30,
         ease: 'none',
         scrollTrigger: {
           trigger: hero,
@@ -201,7 +235,31 @@
   }
 
   /* ================================================================
-     2. MEET THE SURGEON SECTION
+     3. MARQUEE VELOCITY ACCELERATION ON SCROLL
+  ================================================================ */
+  function marqueeScrollAcceleration() {
+    var track = document.querySelector('.marquee__track');
+    if (!track) return;
+
+    ScrollTrigger.create({
+      trigger: '.strip',
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: function (self) {
+        var vel = Math.abs(self.getVelocity() / 300);
+        var clamped = Math.min(vel, 3);
+        gsap.to(track, {
+          timeScale: 1 + clamped,
+          duration: 0.3,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+    });
+  }
+
+  /* ================================================================
+     4. MEET THE SURGEON SECTION
   ================================================================ */
   function surgeonSection() {
     var docVisual = document.querySelector('.doc-visual');
@@ -249,7 +307,6 @@
       });
     }
 
-    // Right Column Copy
     var rightCol = docVisual.nextElementSibling;
     if (rightCol) {
       var h2 = rightCol.querySelector('h2');
@@ -281,7 +338,7 @@
   }
 
   /* ================================================================
-     3. CATEGORY TILES (3D ENTRANCE + TILT)
+     5. CATEGORY TILES (3D ENTRANCE + TILT)
   ================================================================ */
   function categoryTiles() {
     var tiles = document.querySelectorAll('.cat-tile');
@@ -328,7 +385,198 @@
   }
 
   /* ================================================================
-     4. SECTION HEADINGS LINE REVEAL
+     6. DUAL DARK SHOWCASE SECTIONS (SURGICAL / NON-SURGICAL)
+  ================================================================ */
+  function darkShowcaseSections() {
+    var darkSec = document.querySelector('section.bg-ink');
+    if (!darkSec) return;
+
+    // Splits inside the dark section
+    var splits = darkSec.querySelectorAll('.split');
+    splits.forEach(function (sp, i) {
+      var textSide = sp.querySelector('div:first-child');
+      var visualSide = sp.querySelector('.page-hero__visual');
+
+      if (textSide) {
+        var listItems = textSide.querySelectorAll('.mega__list a');
+        if (listItems.length) {
+          gsap.from(listItems, {
+            x: i % 2 === 0 ? -30 : 30,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.06,
+            ease: 'power3.out',
+            scrollTrigger: st(sp, 'top 75%')
+          });
+        }
+      }
+
+      if (visualSide) {
+        var img = visualSide.querySelector('img');
+        if (img) {
+          gsap.set(visualSide, { clipPath: 'inset(0 100% 0 0)' });
+          gsap.to(visualSide, {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 1.3,
+            ease: 'power4.inOut',
+            scrollTrigger: st(sp, 'top 78%')
+          });
+
+          gsap.to(img, {
+            scale: 1.1,
+            yPercent: -10,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: visualSide,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.7
+            }
+          });
+        }
+      }
+    });
+  }
+
+  /* ================================================================
+     7. "WHY CHOOSE" 4 CARDS 3D UNFOLD
+  ================================================================ */
+  function whyChooseCards() {
+    var cards = document.querySelectorAll('.grid-4 .card');
+    if (!cards.length) return;
+
+    gsap.from(cards, {
+      y: 70,
+      opacity: 0,
+      rotationX: 18,
+      duration: 1.1,
+      stagger: 0.15,
+      ease: 'back.out(1.5)',
+      scrollTrigger: st('.grid-4', 'top 78%')
+    });
+
+    cards.forEach(function (card) {
+      var icon = card.querySelector('.icon-tile');
+      if (icon) {
+        card.addEventListener('mouseenter', function () {
+          gsap.to(icon, { scale: 1.15, rotation: 6, duration: 0.35, ease: 'back.out(2)' });
+        });
+        card.addEventListener('mouseleave', function () {
+          gsap.to(icon, { scale: 1, rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+        });
+      }
+    });
+  }
+
+  /* ================================================================
+     8. TEAM CARDS (5 SPECIALISTS 3D ELEVATION)
+  ================================================================ */
+  function teamCards() {
+    var team = document.querySelectorAll('.team-card');
+    if (!team.length) return;
+
+    gsap.from(team, {
+      y: 85,
+      opacity: 0,
+      rotationY: 15,
+      duration: 1.1,
+      stagger: 0.12,
+      ease: 'power3.out',
+      scrollTrigger: st('.grid-5', 'top 75%')
+    });
+
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      team.forEach(function (card) {
+        card.addEventListener('pointermove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(card, {
+            rotationY: x * 12,
+            rotationX: y * -12,
+            y: -10,
+            duration: 0.35,
+            ease: 'power2.out',
+            transformPerspective: 900
+          });
+        });
+
+        card.addEventListener('pointerleave', function () {
+          gsap.to(card, {
+            rotationY: 0,
+            rotationX: 0,
+            y: 0,
+            duration: 0.85,
+            ease: 'elastic.out(1, 0.4)'
+          });
+        });
+      });
+    }
+  }
+
+  /* ================================================================
+     9. VIDEO LOGS MAGNETIC PLAY BUTTON
+  ================================================================ */
+  function videoLogsMagneticPlay() {
+    var videos = document.querySelectorAll('.video-card');
+    if (!videos.length) return;
+
+    gsap.from(videos, {
+      scale: 0.9,
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.12,
+      ease: 'power3.out',
+      scrollTrigger: st('.video-card', 'top 80%')
+    });
+
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    videos.forEach(function (v) {
+      var playBtn = v.querySelector('.video-card__play');
+      if (!playBtn) return;
+
+      v.addEventListener('pointermove', function (e) {
+        var rect = v.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = (e.clientX - cx) * 0.15;
+        var dy = (e.clientY - cy) * 0.15;
+        gsap.to(playBtn, { x: dx, y: dy, scale: 1.12, duration: 0.35, ease: 'power2.out' });
+      });
+
+      v.addEventListener('pointerleave', function () {
+        gsap.to(playBtn, { x: 0, y: 0, scale: 1, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
+  }
+
+  /* ================================================================
+     10. TESTIMONIAL STARS TWINKLE
+  ================================================================ */
+  function testimonialTwinkle() {
+    var testimonials = document.querySelectorAll('.testi');
+    if (!testimonials.length) return;
+
+    testimonials.forEach(function (t) {
+      var stars = t.querySelectorAll('.testi__stars svg');
+      if (stars.length) {
+        gsap.from(stars, {
+          scale: 0,
+          opacity: 0,
+          rotation: -45,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'back.out(3)',
+          scrollTrigger: st(t, 'top 80%')
+        });
+      }
+    });
+  }
+
+  /* ================================================================
+     11. SECTION HEADINGS LINE REVEAL
   ================================================================ */
   function sectionHeadings() {
     document.querySelectorAll('.section-head, .split > div, .strip').forEach(function (sec) {
@@ -353,13 +601,13 @@
   }
 
   /* ================================================================
-     5. GENERAL IMAGE PARALLAX
+     12. GENERAL IMAGE PARALLAX
   ================================================================ */
   function imageParallax() {
-    var images = document.querySelectorAll('.page-hero__visual img, .cat-tile img');
+    var images = document.querySelectorAll('.page-hero__visual img, .cat-tile img, .cta img');
     images.forEach(function (img) {
       gsap.to(img, {
-        yPercent: -10,
+        yPercent: -12,
         ease: 'none',
         scrollTrigger: {
           trigger: img.parentElement,
@@ -372,7 +620,7 @@
   }
 
   /* ================================================================
-     6. CUSTOM CHAMPAGNE CURSOR
+     13. CUSTOM CHAMPAGNE CURSOR
   ================================================================ */
   function customCursor() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -396,7 +644,7 @@
       setRingY(e.clientY);
     }, { passive: true });
 
-    var hoverSelectors = 'a, button, .btn, .cat-tile, .card, .tcard, input, select, textarea';
+    var hoverSelectors = 'a, button, .btn, .cat-tile, .card, .tcard, .team-card, .video-card, input, select, textarea';
     document.addEventListener('mouseover', function (e) {
       if (e.target && e.target.closest(hoverSelectors)) {
         document.body.classList.add('cursor-active');
@@ -410,7 +658,7 @@
   }
 
   /* ================================================================
-     7. AMBIENT GLOW ORBS
+     14. AMBIENT GLOW ORBS
   ================================================================ */
   function ambientGlow() {
     if (document.querySelector('.ambient-glow-wrapper')) return;
@@ -437,41 +685,56 @@
   }
 
   /* ================================================================
-     8. MAGNETIC BUTTONS & RIPPLE
+     15. MAGNETIC BUTTONS & GOLDEN SPARKLE BURST
   ================================================================ */
   function magneticButtons() {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     document.querySelectorAll('.btn').forEach(function (btn) {
-      btn.addEventListener('pointermove', function (e) {
-        var rect = btn.getBoundingClientRect();
-        var cx = rect.left + rect.width / 2;
-        var cy = rect.top + rect.height / 2;
-        var dx = (e.clientX - cx) * 0.18;
-        var dy = (e.clientY - cy) * 0.18;
-        gsap.to(btn, { x: dx, y: dy, duration: 0.35, ease: 'power2.out' });
-      });
-      btn.addEventListener('pointerleave', function () {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.35)' });
-      });
+      if (isDesktop) {
+        btn.addEventListener('pointermove', function (e) {
+          var rect = btn.getBoundingClientRect();
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          var dx = (e.clientX - cx) * 0.18;
+          var dy = (e.clientY - cy) * 0.18;
+          gsap.to(btn, { x: dx, y: dy, duration: 0.35, ease: 'power2.out' });
+        });
+        btn.addEventListener('pointerleave', function () {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.35)' });
+        });
+      }
 
-      // Click ripple
-      btn.style.position = 'relative';
-      btn.style.overflow = 'hidden';
+      // Sparkle Particle Explosion on Click
       btn.addEventListener('click', function (e) {
         var rect = btn.getBoundingClientRect();
-        var ripple = document.createElement('span');
-        var size = Math.max(rect.width, rect.height) * 2.5;
-        ripple.style.cssText =
-          'position:absolute;width:' + size + 'px;height:' + size + 'px;' +
-          'border-radius:50%;background:rgba(255,255,255,0.35);pointer-events:none;z-index:1;' +
-          'left:' + (e.clientX - rect.left - size / 2) + 'px;' +
-          'top:' + (e.clientY - rect.top - size / 2) + 'px;';
-        btn.appendChild(ripple);
-        gsap.fromTo(ripple,
-          { scale: 0, opacity: 1 },
-          { scale: 1, opacity: 0, duration: 0.75, ease: 'power2.out', onComplete: function () { ripple.remove(); } }
-        );
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+
+        for (var i = 0; i < 8; i++) {
+          var p = document.createElement('span');
+          p.className = 'btn-sparkle';
+          p.style.left = x + 'px';
+          p.style.top = y + 'px';
+          btn.appendChild(p);
+
+          var angle = (Math.PI * 2 * i) / 8 + (Math.random() - 0.5);
+          var dist = 25 + Math.random() * 35;
+          var targetX = x + Math.cos(angle) * dist;
+          var targetY = y + Math.sin(angle) * dist;
+
+          gsap.to(p, {
+            x: Math.cos(angle) * dist,
+            y: Math.sin(angle) * dist,
+            opacity: 0,
+            scale: Math.random() * 1.5 + 0.5,
+            duration: 0.6 + Math.random() * 0.3,
+            ease: 'power2.out',
+            onComplete: function () {
+              p.remove();
+            }
+          });
+        }
       });
     });
   }
@@ -482,11 +745,18 @@
   function init() {
     disableLegacy();
     initLenis();
+    scrollProgressBar();
     ambientGlow();
     customCursor();
     heroEntrance();
+    marqueeScrollAcceleration();
     surgeonSection();
     categoryTiles();
+    darkShowcaseSections();
+    whyChooseCards();
+    teamCards();
+    videoLogsMagneticPlay();
+    testimonialTwinkle();
     sectionHeadings();
     imageParallax();
     magneticButtons();
