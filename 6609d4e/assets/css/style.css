@@ -1555,8 +1555,8 @@ body.motion-paused .marquee__track>[aria-hidden="true"] {display:none}
 .motion-ready .reveal:not(.is-visible),.motion-ready .reveal-stagger:not(.is-visible)>* {opacity:0;transform:translateY(22px)}
 .motion-ready .reveal,.motion-ready .reveal-stagger>* {transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .motion-ready .reveal-stagger.is-visible>* {transition-delay:var(--reveal-delay,0ms)}
-.motion-ready .hero__frame,.motion-ready .doc-visual__frame {clip-path:inset(0);transition:clip-path 1.35s var(--ease)}
-.motion-ready .hero__visual:not(.is-visible) .hero__frame,.motion-ready .doc-visual:not(.is-visible) .doc-visual__frame {clip-path:inset(0 0 100% 0)}
+.motion-ready .hero__frame,.motion-ready .doc-visual__frame {clip-path:none}
+.motion-ready .hero__visual:not(.is-visible) .hero__frame,.motion-ready .doc-visual:not(.is-visible) .doc-visual__frame {clip-path:none}
 html:not(.js-ready) .marquee__track {animation:none}
 .tab-panel.is-active {animation:atelier-enter .45s var(--ease) both}
 .lightbox.is-open {animation:atelier-enter .3s var(--ease) both}

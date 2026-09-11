@@ -38,6 +38,30 @@ html.lenis, html.lenis body {
   transform: none !important;
 }
 
+/* Ensure hero and doctor visual frames are NEVER clipped or hidden */
+.hero__visual,
+.hero__frame,
+.hero__frame img,
+.doc-visual,
+.doc-visual__frame,
+.doc-visual__frame img,
+.motion-ready .hero__frame,
+.motion-ready .doc-visual__frame,
+.motion-ready .hero__visual:not(.is-visible) .hero__frame,
+.motion-ready .doc-visual:not(.is-visible) .doc-visual__frame {
+  clip-path: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hero__frame img {
+  animation: none !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 /* ── 3. Line Mask Reveals (Split Text) ────────────────────────── */
 .ln-mask {
   overflow: hidden !important;

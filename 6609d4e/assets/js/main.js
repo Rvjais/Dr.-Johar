@@ -209,27 +209,32 @@
   }
 
   /* ---------- Counters ---------- */
-  const counters = $$('[data-count]');
-  if (counters.length && 'IntersectionObserver' in window && motionEnabled()) {
-    const cio = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (!en.isIntersecting) return;
-        const el = en.target;
-        const target = parseFloat(el.dataset.count);
-        const suffix = el.dataset.suffix || '';
-        const dur = 1400;
-        const start = performance.now();
-        const step = now => {
-          const p = motionEnabled() ? Math.min(1, (now - start) / dur) : 1;
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased).toLocaleString('en-IN') + suffix;
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        cio.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(el => cio.observe(el));
+  if (typeof gsap === 'undefined') {
+    const counters = $$('[data-count]');
+    if (counters.length && 'IntersectionObserver' in window && motionEnabled()) {
+      const cio = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          const raw = el.dataset.count;
+          if (!raw) return;
+          const target = parseFloat(raw);
+          if (isNaN(target)) return;
+          const suffix = el.dataset.suffix || '';
+          const dur = 1400;
+          const start = performance.now();
+          const step = now => {
+            const p = motionEnabled() ? Math.min(1, (now - start) / dur) : 1;
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased).toLocaleString('en-IN') + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          cio.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(el => cio.observe(el));
+    }
   }
 
   /* ---------- Accordions ---------- */

@@ -36,8 +36,13 @@
   ================================================================ */
   function disableLegacy() {
     document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
-      el.classList.remove('reveal', 'reveal-stagger', 'is-visible');
+      el.classList.add('is-visible');
+      el.classList.remove('reveal', 'reveal-stagger');
     });
+    var hv = document.querySelector('.hero__visual');
+    if (hv) hv.classList.add('is-visible');
+    var dv = document.querySelector('.doc-visual');
+    if (dv) dv.classList.add('is-visible');
   }
 
   function splitLines(el) {
@@ -170,9 +175,11 @@
       trustItems.forEach(function (item) {
         var countEl = item.querySelector('[data-count]');
         if (!countEl) return;
-        var target = parseFloat(countEl.getAttribute('data-count'));
+        var raw = countEl.getAttribute('data-count');
+        var target = parseFloat(raw);
+        if (isNaN(target)) return;
         var suffix = countEl.getAttribute('data-suffix') || '';
-        countEl.removeAttribute('data-count');
+        countEl.textContent = '0' + suffix;
         var proxy = { val: 0 };
         gsap.to(proxy, {
           val: target,
@@ -190,15 +197,28 @@
     }
 
     // Visual Frame & Image
+    var heroVisual = hero.querySelector('.hero__visual');
+    if (heroVisual) {
+      heroVisual.classList.add('is-visible');
+    }
+
+    var heroFrame = hero.querySelector('.hero__frame');
+    if (heroFrame) {
+      gsap.set(heroFrame, { opacity: 0, scale: 0.94, y: 25 });
+      tl.to(heroFrame, {
+        opacity: 1, scale: 1, y: 0, duration: 1.4, ease: 'power3.out'
+      }, 0.2);
+    }
+
     var frameImg = hero.querySelector('.hero__frame img');
     if (frameImg) {
-      gsap.set(frameImg, { scale: 1.35, filter: 'blur(6px) brightness(0.7)' });
+      gsap.set(frameImg, { scale: 1.25, filter: 'blur(8px) brightness(0.8)', opacity: 1 });
       tl.to(frameImg, {
-        scale: 1, filter: 'blur(0px) brightness(1)', duration: 2.4, ease: 'power3.out'
-      }, 0.2);
+        scale: 1, filter: 'blur(0px) brightness(1)', duration: 2.0, ease: 'power3.out'
+      }, 0.3);
 
       gsap.to(frameImg, {
-        yPercent: 18,
+        yPercent: 15,
         ease: 'none',
         scrollTrigger: {
           trigger: hero,
