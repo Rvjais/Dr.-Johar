@@ -1,0 +1,225 @@
+/* ================================================================
+   KRATAM HOSPITAL – GSAP CINEMATIC STYLES
+   Companion styles for GSAP + ScrollTrigger + Lenis
+================================================================ */
+
+/* ── 1. Lenis Smooth Scroll Integration ──────────────────────── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ── 2. Transition Conflict Override ─────────────────────────── */
+/* Prevent CSS transitions from conflicting with GSAP's 60fps ticker */
+.studio-hero *,
+.specialist-card,
+.journey-grid article,
+.ln-inner,
+.surgeon-portrait,
+.surgeon-portrait img,
+.surgeon-copy,
+.practice-facts strong,
+.discovery-image,
+.discovery-image img,
+.location-photo,
+.location-photo img,
+.consultation-invitation,
+.story-video,
+.story-video img,
+.journal-feature,
+.journal-feature img {
+  transition-property: background-color, border-color, color, box-shadow !important;
+}
+
+/* Ensure reveal opacity isn't hidden by legacy CSS */
+.reveal, .reveal-stagger > * {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ── 3. Line Mask Reveals (Split Text) ────────────────────────── */
+.ln-mask {
+  overflow: hidden !important;
+  display: block !important;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.ln-inner {
+  display: block !important;
+  will-change: transform, opacity;
+}
+
+/* ── 4. Shimmer on Luxury Italic Typography ───────────────────── */
+.hero-copy h1 em,
+.studio-heading h2 em,
+.footer-opening em,
+.consultation-invitation h2 em {
+  background: linear-gradient(110deg, #edb4a5 0%, #ffffff 45%, #edb4a5 60%, #c4958a 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: luxuryGoldShine 7s ease-in-out infinite;
+}
+
+@keyframes luxuryGoldShine {
+  0% { background-position: 250% 0; }
+  50% { background-position: 0% 0; }
+  100% { background-position: -250% 0; }
+}
+
+/* ── 5. Luxury Custom Cursor (Desktop Pointer Only) ───────────── */
+@media (hover: hover) and (pointer: fine) {
+  .kratam-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: #edb4a5;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px rgba(237, 180, 165, 0.9);
+    transition: opacity 0.25s ease;
+  }
+
+  .kratam-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid rgba(237, 180, 165, 0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+    will-change: transform;
+  }
+
+  body.cursor-active .kratam-cursor-ring {
+    width: 68px;
+    height: 68px;
+    border-color: rgba(237, 180, 165, 0.95);
+    background: rgba(237, 180, 165, 0.15);
+    backdrop-filter: blur(2px);
+  }
+
+  body.cursor-active .kratam-cursor-dot {
+    opacity: 0;
+  }
+}
+
+/* ── 6. 3D Specular Lighting for Cards ────────────────────────── */
+.specialist-card,
+.journey-grid article,
+.journal-feature,
+.story-video {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-specular-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+.specialist-card:hover .card-specular-shine,
+.journey-grid article:hover .card-specular-shine,
+.journal-feature:hover .card-specular-shine {
+  opacity: 1;
+}
+
+/* ── 7. Ambient Glowing Depth Orbs ────────────────────────────── */
+.ambient-glow-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.16;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.ambient-glow--1 {
+  top: 10%;
+  left: -8%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #edb4a5 0%, rgba(237, 180, 165, 0) 70%);
+}
+
+.ambient-glow--2 {
+  top: 60%;
+  right: -8%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, #9e5145 0%, rgba(158, 81, 69, 0) 70%);
+}
+
+/* ── 8. Image Curtain Reveal Overlays ─────────────────────────── */
+.img-curtain {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-curtain img {
+  will-change: transform, filter;
+}
+
+/* ── 9. Interactive Magnetic Buttons ─────────────────────────── */
+.btn {
+  will-change: transform;
+}
+
+/* ── 10. Consultation Invitation Deep Glow ───────────────────── */
+.consultation-invitation {
+  position: relative;
+  overflow: hidden;
+}
+
+.consultation-invitation::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(237, 180, 165, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  border-radius: 50%;
+}
