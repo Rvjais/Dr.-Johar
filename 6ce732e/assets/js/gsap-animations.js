@@ -1006,8 +1006,9 @@
     var cards = document.querySelectorAll('.specialist-card, .journey-grid article, .journal-feature');
     cards.forEach(function (card) {
       if (!card.querySelector('.card-specular-shine')) {
-        var shine = document.createElement('div');
+        var shine = document.createElement('span');
         shine.className = 'card-specular-shine';
+        shine.style.cssText = 'position:absolute!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important;z-index:4!important;border-radius:inherit!important;';
         card.appendChild(shine);
       }
       card.addEventListener('pointermove', function (e) {

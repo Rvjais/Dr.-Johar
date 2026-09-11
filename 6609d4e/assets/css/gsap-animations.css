@@ -1,5 +1,5 @@
 /* ================================================================
-   KRATAM HOSPITAL – GSAP CINEMATIC STYLES
+   KRATAM HOSPITAL – GSAP CINEMATIC STYLES (IVORY & GOLD EDITION)
    Companion styles for GSAP + ScrollTrigger + Lenis
 ================================================================ */
 
@@ -21,28 +21,18 @@ html.lenis, html.lenis body {
 }
 
 /* ── 2. Transition Conflict Override ─────────────────────────── */
-/* Prevent CSS transitions from conflicting with GSAP's 60fps ticker */
-.studio-hero *,
-.specialist-card,
-.journey-grid article,
-.ln-inner,
-.surgeon-portrait,
-.surgeon-portrait img,
-.surgeon-copy,
-.practice-facts strong,
-.discovery-image,
-.discovery-image img,
-.location-photo,
-.location-photo img,
-.consultation-invitation,
-.story-video,
-.story-video img,
-.journal-feature,
-.journal-feature img {
+.hero *,
+.doc-visual,
+.doc-visual img,
+.cat-tile,
+.cat-tile img,
+.tcard,
+.card,
+.split > *,
+.page-hero__visual img {
   transition-property: background-color, border-color, color, box-shadow !important;
 }
 
-/* Ensure reveal opacity isn't hidden by legacy CSS */
 .reveal, .reveal-stagger > * {
   opacity: 1 !important;
   transform: none !important;
@@ -52,8 +42,8 @@ html.lenis, html.lenis body {
 .ln-mask {
   overflow: hidden !important;
   display: block !important;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
 }
 
 .ln-inner {
@@ -62,25 +52,25 @@ html.lenis, html.lenis body {
 }
 
 /* ── 4. Shimmer on Luxury Italic Typography ───────────────────── */
-.hero-copy h1 em,
-.studio-heading h2 em,
-.footer-opening em,
-.consultation-invitation h2 em {
-  background: linear-gradient(110deg, #edb4a5 0%, #ffffff 45%, #edb4a5 60%, #c4958a 100%);
-  background-size: 250% 100%;
+.hero__title em,
+.display-1 em,
+.h2 em,
+.signature {
+  background: linear-gradient(115deg, #b08a49 0%, #ffffff 40%, #d4b483 60%, #8a6528 100%);
+  background-size: 260% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
-  animation: luxuryGoldShine 7s ease-in-out infinite;
+  animation: champagneShimmer 7s ease-in-out infinite;
 }
 
-@keyframes luxuryGoldShine {
-  0% { background-position: 250% 0; }
+@keyframes champagneShimmer {
+  0% { background-position: 260% 0; }
   50% { background-position: 0% 0; }
-  100% { background-position: -250% 0; }
+  100% { background-position: -260% 0; }
 }
 
-/* ── 5. Luxury Custom Cursor (Desktop Pointer Only) ───────────── */
+/* ── 5. Luxury Champagne Cursor (Desktop) ─────────────────────── */
 @media (hover: hover) and (pointer: fine) {
   .kratam-cursor-dot {
     position: fixed;
@@ -88,12 +78,12 @@ html.lenis, html.lenis body {
     left: 0;
     width: 8px;
     height: 8px;
-    background: #edb4a5;
+    background: #b08a49;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 12px rgba(237, 180, 165, 0.9);
+    box-shadow: 0 0 12px rgba(176, 138, 73, 0.9);
     transition: opacity 0.25s ease;
   }
 
@@ -103,7 +93,7 @@ html.lenis, html.lenis body {
     left: 0;
     width: 38px;
     height: 38px;
-    border: 1.5px solid rgba(237, 180, 165, 0.55);
+    border: 1.5px solid rgba(176, 138, 73, 0.5);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -116,10 +106,10 @@ html.lenis, html.lenis body {
   }
 
   body.cursor-active .kratam-cursor-ring {
-    width: 68px;
-    height: 68px;
-    border-color: rgba(237, 180, 165, 0.95);
-    background: rgba(237, 180, 165, 0.15);
+    width: 65px;
+    height: 65px;
+    border-color: rgba(176, 138, 73, 0.95);
+    background: rgba(176, 138, 73, 0.12);
     backdrop-filter: blur(2px);
   }
 
@@ -128,20 +118,17 @@ html.lenis, html.lenis body {
   }
 }
 
-/* ── 6. 3D Specular Lighting for Cards ────────────────────────── */
-.specialist-card,
-.journey-grid article,
-.journal-feature,
-.story-video {
+/* ── 6. 3D Specular Lighting for Category Tiles & Cards ────────── */
+.cat-tile,
+.tcard,
+.card,
+.doc-visual {
   position: relative;
   transform-style: preserve-3d;
   perspective: 1000px;
 }
 
-.card-specular-shine,
-.specialist-card > .card-specular-shine,
-.journey-grid article > .card-specular-shine,
-.journal-feature > .card-specular-shine {
+.card-specular-shine {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
@@ -150,19 +137,19 @@ html.lenis, html.lenis body {
   border-radius: inherit !important;
   pointer-events: none !important;
   background-color: transparent !important;
-  background-image: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%) !important;
+  background-image: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.24) 0%, transparent 70%) !important;
   opacity: 0;
   transition: opacity 0.35s ease;
-  z-index: 4;
+  z-index: 4 !important;
 }
 
-.specialist-card:hover .card-specular-shine,
-.journey-grid article:hover .card-specular-shine,
-.journal-feature:hover .card-specular-shine {
+.cat-tile:hover .card-specular-shine,
+.tcard:hover .card-specular-shine,
+.card:hover .card-specular-shine {
   opacity: 1;
 }
 
-/* ── 7. Ambient Glowing Depth Orbs ────────────────────────────── */
+/* ── 7. Ambient Champagne Glow Orbs ───────────────────────────── */
 .ambient-glow-wrapper {
   position: fixed;
   inset: 0;
@@ -175,59 +162,34 @@ html.lenis, html.lenis body {
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.16;
+  opacity: 0.14;
   pointer-events: none;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   will-change: transform;
 }
 
 .ambient-glow--1 {
   top: 10%;
-  left: -8%;
+  left: -5%;
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle, #edb4a5 0%, rgba(237, 180, 165, 0) 70%);
+  background: radial-gradient(circle, #d4b483 0%, rgba(212, 180, 131, 0) 70%);
 }
 
 .ambient-glow--2 {
-  top: 60%;
-  right: -8%;
+  top: 55%;
+  right: -5%;
   width: 650px;
   height: 650px;
-  background: radial-gradient(circle, #9e5145 0%, rgba(158, 81, 69, 0) 70%);
+  background: radial-gradient(circle, #b08a49 0%, rgba(176, 138, 73, 0) 70%);
 }
 
-/* ── 8. Image Curtain Reveal Overlays ─────────────────────────── */
-.img-curtain {
-  overflow: hidden;
-  position: relative;
-}
-
-.img-curtain img {
-  will-change: transform, filter;
+/* ── 8. Rotating Decorative Hero Rings ────────────────────────── */
+.hero__ring {
+  will-change: transform;
 }
 
 /* ── 9. Interactive Magnetic Buttons ─────────────────────────── */
 .btn {
   will-change: transform;
 }
-
-/* ── 10. Consultation Invitation Deep Glow ───────────────────── */
-.consultation-invitation {
-  position: relative;
-  overflow: hidden;
-}
-
-.consultation-invitation::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(237, 180, 165, 0.12) 0%, transparent 65%);
-  pointer-events: none;
-  border-radius: 50%;
-}
-

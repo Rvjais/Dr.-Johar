@@ -138,12 +138,19 @@ html.lenis, html.lenis body {
   perspective: 1000px;
 }
 
-.card-specular-shine {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%);
+.card-specular-shine,
+.specialist-card > .card-specular-shine,
+.journey-grid article > .card-specular-shine,
+.journal-feature > .card-specular-shine {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  background-color: transparent !important;
+  background-image: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%) !important;
   opacity: 0;
   transition: opacity 0.35s ease;
   z-index: 4;
@@ -223,3 +230,4 @@ html.lenis, html.lenis body {
   pointer-events: none;
   border-radius: 50%;
 }
+
