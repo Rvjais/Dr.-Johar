@@ -1,0 +1,478 @@
+/* 
+  Kratam Hospital - Advanced Animation System
+  Uses existing variables: --ease, --ink, --gold, --rose, --cream
+*/
+
+:root {
+  --anim-duration-fast: 0.3s;
+  --anim-duration-base: 0.6s;
+  --anim-duration-slow: 1.2s;
+  --anim-easing: var(--ease, cubic-bezier(.2, .8, .2, 1));
+  
+  /* Fallbacks in case variables aren't defined in main CSS */
+  --ease-fallback: cubic-bezier(.2, .8, .2, 1);
+  --gold-fallback: #9e5145;
+  --rose-fallback: #edb4a5;
+  --cream-fallback: #f8f6f3;
+}
+
+/* -------------------------------------------------------------
+   REDUCED MOTION PREFERENCE
+------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  
+  /* -------------------------------------------------------------
+     1. ENHANCED SCROLL REVEAL VARIANTS
+     (Triggered by adding .is-animated class via JS)
+  ------------------------------------------------------------- */
+  
+  .anim-fade-up,
+  .anim-fade-left,
+  .anim-fade-right,
+  .anim-scale-in,
+  .anim-blur-in,
+  .anim-clip-up {
+    opacity: 0;
+    transition: opacity var(--anim-duration-slow) var(--anim-easing),
+                transform var(--anim-duration-slow) var(--anim-easing),
+                filter var(--anim-duration-slow) var(--anim-easing),
+                clip-path var(--anim-duration-slow) var(--anim-easing);
+    will-change: transform, opacity, filter, clip-path;
+  }
+
+  /* Fade Up */
+  .anim-fade-up { transform: translateY(40px); }
+  .anim-fade-up.is-animated { opacity: 1; transform: translateY(0); }
+
+  /* Fade Left */
+  .anim-fade-left { transform: translateX(40px); }
+  .anim-fade-left.is-animated { opacity: 1; transform: translateX(0); }
+
+  /* Fade Right */
+  .anim-fade-right { transform: translateX(-40px); }
+  .anim-fade-right.is-animated { opacity: 1; transform: translateX(0); }
+
+  /* Scale In */
+  .anim-scale-in { transform: scale(0.85); }
+  .anim-scale-in.is-animated { opacity: 1; transform: scale(1); }
+
+  /* Blur In */
+  .anim-blur-in { filter: blur(8px); transform: translateY(20px); }
+  .anim-blur-in.is-animated { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+  /* Clip Up */
+  .anim-clip-up { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transform: translateY(20px); }
+  .anim-clip-up.is-animated { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+
+  /* Stagger Delays */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+
+
+  /* -------------------------------------------------------------
+     2. FLOATING & PULSING DECORATIVE EFFECTS
+  ------------------------------------------------------------- */
+  
+  .anim-float {
+    animation: float 4s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .anim-pulse-glow {
+    animation: pulse-glow 3s infinite ease-in-out;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { 
+      transform: scale(1); 
+      box-shadow: 0 0 0 0 rgba(158, 81, 69, 0); /* using typical --gold */
+    }
+    50% { 
+      transform: scale(1.02); 
+      box-shadow: 0 0 20px 2px rgba(158, 81, 69, 0.4);
+    }
+  }
+
+  .anim-rotate-slow {
+    animation: rotate-slow 60s linear infinite;
+    will-change: transform;
+  }
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+
+  /* -------------------------------------------------------------
+     3. CARD HOVER ENHANCEMENTS
+  ------------------------------------------------------------- */
+  
+  .anim-card-lift {
+    transition: transform 0.5s var(--anim-easing), box-shadow 0.5s var(--anim-easing);
+    will-change: transform, box-shadow;
+  }
+  .anim-card-lift:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  }
+
+  .anim-card-tilt {
+    /* JS sets transform: rotateX(...) rotateY(...); */
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+  }
+
+  .anim-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .anim-shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0s;
+    z-index: 2;
+  }
+  .anim-shimmer:hover::before {
+    animation: shimmer-sweep 0.8s ease-in-out forwards;
+  }
+  @keyframes shimmer-sweep {
+    100% { left: 150%; }
+  }
+
+
+  /* -------------------------------------------------------------
+     4. TEXT ANIMATIONS
+  ------------------------------------------------------------- */
+  
+  /* Text Reveal Staggered */
+  .anim-text-reveal .char,
+  .anim-text-reveal .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(1em);
+    transition: opacity 0.8s var(--anim-easing), transform 0.8s var(--anim-easing);
+    transition-delay: calc(var(--char-index, 0) * 0.05s);
+  }
+  .anim-text-reveal.is-animated .char,
+  .anim-text-reveal.is-animated .word {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Animated Gradient Text */
+  .anim-gradient-text {
+    background: linear-gradient(
+      to right, 
+      var(--gold, var(--gold-fallback)), 
+      var(--rose, var(--rose-fallback)), 
+      #b0a5ed, /* lavender-ish */
+      var(--gold, var(--gold-fallback))
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient-shift 6s linear infinite;
+  }
+  @keyframes gradient-shift {
+    to { background-position: 200% center; }
+  }
+
+  /* Typewriter Cursor */
+  .anim-typewriter::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 2px;
+    opacity: 1;
+    animation: blink 0.8s step-end infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+
+  /* -------------------------------------------------------------
+     5. IMAGE REVEAL EFFECTS
+  ------------------------------------------------------------- */
+  
+  .anim-img-reveal {
+    position: relative;
+    overflow: hidden;
+  }
+  .anim-img-reveal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--cream, var(--cream-fallback));
+    transform-origin: right;
+    transition: transform 1.2s var(--anim-easing);
+    z-index: 1;
+  }
+  .anim-img-reveal.is-animated::after {
+    transform: scaleX(0);
+  }
+
+  .anim-img-zoom {
+    overflow: hidden;
+  }
+  .anim-img-zoom img {
+    transform: scale(1.15);
+    transition: transform 1.8s var(--anim-easing);
+    will-change: transform;
+  }
+  .anim-img-zoom.is-animated img {
+    transform: scale(1);
+  }
+
+  .anim-img-parallax {
+    overflow: hidden;
+  }
+  .anim-img-parallax img {
+    will-change: transform;
+    /* JS will handle transform: translateY(var(--scroll-offset)) */
+  }
+
+
+  /* -------------------------------------------------------------
+     6. SECTION DIVIDER ANIMATIONS
+  ------------------------------------------------------------- */
+  
+  .anim-line-grow {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gold, var(--gold-fallback));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 1.2s var(--anim-easing);
+  }
+  .anim-line-grow.is-animated {
+    transform: scaleX(1);
+  }
+
+  .anim-dot-line {
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to right, var(--gold, var(--gold-fallback)) 50%, transparent 50%);
+    background-size: 8px 100%;
+    background-repeat: repeat-x;
+    mask-image: linear-gradient(to right, #000 100%, transparent 0);
+    mask-size: 0 100%;
+    mask-repeat: no-repeat;
+    transition: mask-size 1.5s var(--anim-easing);
+    -webkit-mask-image: linear-gradient(to right, #000 100%, transparent 0);
+    -webkit-mask-size: 0 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-transition: -webkit-mask-size 1.5s var(--anim-easing);
+  }
+  .anim-dot-line.is-animated {
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+  }
+
+
+  /* -------------------------------------------------------------
+     7. BUTTON MICRO-INTERACTIONS
+  ------------------------------------------------------------- */
+  
+  .anim-btn-magnetic {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+  }
+  
+  .anim-btn-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+  .anim-btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    padding-top: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 10%, transparent 10.01%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: translate(-50%, -50%) scale(10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.8s;
+    pointer-events: none;
+  }
+  .anim-btn-ripple:active::after {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    transition: 0s;
+  }
+
+
+  /* -------------------------------------------------------------
+     8. COUNTER/NUMBER ANIMATIONS
+  ------------------------------------------------------------- */
+  
+  .anim-counter {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .anim-counter.is-done {
+    transform: scale(1.15);
+  }
+
+
+  /* -------------------------------------------------------------
+     9. SCROLL-DRIVEN ANIMATIONS (PROGRESSIVE ENHANCEMENT)
+  ------------------------------------------------------------- */
+  
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    /* Section Headings */
+    .scroll-reveal-heading {
+      animation: sd-fade-slide-up linear forwards;
+      animation-timeline: view();
+      animation-range: entry 10% entry 80%;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes sd-fade-slide-up {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .scroll-scale-card {
+      animation: sd-scale-in linear forwards;
+      animation-timeline: view();
+      animation-range: entry 5% entry 50%;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes sd-scale-in {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Image Parallax (Subtle) */
+    .scroll-img-parallax {
+      animation: sd-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+    
+    @keyframes sd-parallax {
+      from { transform: translateY(-5%); }
+      to { transform: translateY(5%); }
+    }
+  }
+
+
+  /* -------------------------------------------------------------
+     10. PAGE LOAD ORCHESTRATION
+  ------------------------------------------------------------- */
+  
+  /* Initial states */
+  .anim-page-ready .topbar,
+  .anim-page-ready .header,
+  .anim-page-ready .hero-content > * {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: var(--anim-easing);
+  }
+
+  .anim-page-ready .topbar {
+    transform: translateY(-100%);
+    animation-name: slide-down-fade;
+    animation-duration: 0.8s;
+  }
+
+  .anim-page-ready .header {
+    animation-name: simple-fade;
+    animation-duration: 1s;
+    animation-delay: 0.2s;
+  }
+
+  .anim-page-ready .hero-content > * {
+    transform: translateY(30px);
+    animation-name: slide-up-fade;
+    animation-duration: 0.8s;
+  }
+  
+  .anim-page-ready .hero-content > *:nth-child(1) { animation-delay: 0.4s; }
+  .anim-page-ready .hero-content > *:nth-child(2) { animation-delay: 0.5s; }
+  .anim-page-ready .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+  .anim-page-ready .hero-content > *:nth-child(4) { animation-delay: 0.7s; }
+
+  @keyframes slide-down-fade {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes simple-fade {
+    to { opacity: 1; }
+  }
+  @keyframes slide-up-fade {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+
+  /* -------------------------------------------------------------
+     11. SMOOTH BACKGROUND GRADIENT SHIFT
+  ------------------------------------------------------------- */
+  
+  .anim-bg-shift {
+    background: linear-gradient(120deg, var(--rose, var(--rose-fallback)), var(--cream, var(--cream-fallback)), var(--gold, var(--gold-fallback)));
+    background-size: 200% 200%;
+    animation: bg-pan 12s ease-in-out infinite alternate;
+  }
+  @keyframes bg-pan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+
+  /* -------------------------------------------------------------
+     12. SCROLL PROGRESS ENHANCEMENT
+  ------------------------------------------------------------- */
+  
+  .scroll-progress-glow {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background-color: var(--gold, var(--gold-fallback));
+    box-shadow: 0 0 10px 2px rgba(158, 81, 69, 0.5); /* fallback gold glow */
+    transform-origin: 0 50%;
+    /* Width or scaleX to be handled by JS or scroll-driven animation */
+    will-change: transform;
+    z-index: 9999;
+  }
+  
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress-glow {
+      transform: scaleX(0);
+      animation: grow-progress linear;
+      animation-timeline: scroll();
+    }
+    @keyframes grow-progress {
+      to { transform: scaleX(1); }
+    }
+  }
+  
+}
