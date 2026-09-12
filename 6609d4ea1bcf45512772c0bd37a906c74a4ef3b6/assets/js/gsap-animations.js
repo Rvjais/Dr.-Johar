@@ -179,6 +179,7 @@
         var target = parseFloat(raw);
         if (isNaN(target)) return;
         var suffix = countEl.getAttribute('data-suffix') || '';
+        countEl.removeAttribute('data-count');
         countEl.textContent = '0' + suffix;
         var proxy = { val: 0 };
         gsap.to(proxy, {
@@ -212,13 +213,13 @@
 
     var frameImg = hero.querySelector('.hero__frame img');
     if (frameImg) {
-      gsap.set(frameImg, { scale: 1.25, filter: 'blur(8px) brightness(0.8)', opacity: 1 });
+      gsap.set(frameImg, { scale: 1.35, filter: 'blur(6px) brightness(0.7)' });
       tl.to(frameImg, {
-        scale: 1, filter: 'blur(0px) brightness(1)', duration: 2.0, ease: 'power3.out'
-      }, 0.3);
+        scale: 1, filter: 'blur(0px) brightness(1)', duration: 2.4, ease: 'power3.out'
+      }, 0.2);
 
       gsap.to(frameImg, {
-        yPercent: 15,
+        yPercent: 18,
         ease: 'none',
         scrollTrigger: {
           trigger: hero,

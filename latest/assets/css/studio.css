@@ -212,7 +212,10 @@ html:not(.js-ready) .nav>li:hover>.mega,html:not(.js-ready) .nav>li:focus-within
 .journey-grid p{font-size:.84rem;line-height:1.85;color:var(--muted);min-height:95px}
 .journey-grid .text-link{font-size:.76rem;margin-top:24px}
 .specialists{border-top:1px solid var(--line-2)}
-.specialist-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px}
+.specialist-grid, .specialists .grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(16px,2.5vw,26px)}
+@media (max-width:1100px){.specialist-grid, .specialists .grid-5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.specialist-grid, .specialists .grid-5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.specialist-grid, .specialists .grid-5{grid-template-columns:1fr}}
 .specialist-card>.specialist-card__visual{position:relative;aspect-ratio:4/4.7;border-radius:18px;overflow:hidden;background:#e3e0df}
 .specialist-card img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s var(--ease)}
 .specialist-card:hover img{transform:scale(1.045)}
@@ -285,7 +288,7 @@ a:hover .round-link{background:var(--rose);transform:rotate(8deg)}
 .location-book a{display:flex;align-items:center;gap:16px;font-size:1.05rem;letter-spacing:-.025em}
 .location-book .icon{width:17px;height:17px}
 .location-photo{position:relative;min-height:450px;background:var(--cream-2)}
-.location-photo>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.location-photo>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center 22%}
 .location-photo-tag{position:absolute;bottom:25px;right:25px;left:25px;display:flex;justify-content:space-between;gap:20px;padding:18px 22px;background:rgba(255,255,255,.93);border-radius:12px;backdrop-filter:blur(10px);font-size:.81rem}
 .consultation-invitation{background:#edcfc4;position:relative;overflow:hidden}
 .consultation-invitation>.container{padding-top:85px;padding-bottom:90px;text-align:center;position:relative}
@@ -363,12 +366,21 @@ a:hover .round-link{background:var(--rose);transform:rotate(8deg)}
 .post-card h3{font-size:1.3rem;line-height:1.3}
 .post-card__meta{font-size:.58rem;letter-spacing:.06em;flex-wrap:wrap}
 .post-card:hover .post-card__img img{transform:scale(1.04);filter:none}
-.team-card{text-align:left}
-.team-card__img{border-radius:20px;aspect-ratio:4/4.8}
-.team-card--lead .team-card__img{outline:0}
-.team-card h3{font-size:1.15rem;line-height:1.3}
-.team-card p{font-size:.74rem;line-height:1.75}
-.team-card .link-arrow{font-size:.72rem}
+.team-card{text-align:left;position:relative}
+.team-card__img{
+  width:100%;aspect-ratio:1;border-radius:48% 48% 4px 4px;overflow:hidden;background:#efe3cc;margin-bottom:20px;position:relative;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+}
+.team-card:hover .team-card__img{transform:translateY(-6px);box-shadow:0 14px 34px rgba(41,38,46,.12)}
+.team-card__img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s var(--ease)}
+.team-card:hover .team-card__img img{transform:scale(1.05)}
+.team-card__img::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(21,23,27,.06);pointer-events:none}
+.team-card--lead .team-card__img{outline:2px solid var(--gold, #9e5145);outline-offset:7px}
+.team-card h3{font-family:var(--serif);font-size:1.35rem;font-weight:600;line-height:1.2;margin-bottom:4px;color:var(--ink);letter-spacing:-.015em}
+.team-card p{font-size:.78rem;color:var(--muted);line-height:1.6;min-height:2.8em;margin-bottom:12px}
+.team-card .link-arrow{font-size:.78rem;display:inline-flex;align-items:center;gap:6px;color:var(--gold, #9e5145);font-weight:600;transition:gap .3s var(--ease)}
+.team-card .link-arrow:hover{gap:10px}
+.team-card .link-arrow .icon{width:16px;height:16px}
 .doc-visual__frame{border-radius:24px;box-shadow:none}
 .doc-visual__badge{background:var(--ink);box-shadow:none}
 .doc-visual__quote{border:0;background:#fff;border-radius:18px;box-shadow:var(--shadow)}
