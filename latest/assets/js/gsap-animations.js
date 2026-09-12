@@ -481,6 +481,17 @@
       });
     }
 
+    var mediaImgs = section.querySelectorAll('.journey-card__media img');
+    if (mediaImgs.length) {
+      gsap.from(mediaImgs, {
+        scale: 1.18,
+        duration: 1.3,
+        stagger: 0.22,
+        ease: 'power2.out',
+        scrollTrigger: st(section, 'top 70%')
+      });
+    }
+
     var numbers = section.querySelectorAll('.journey-number');
     if (numbers.length) {
       gsap.from(numbers, {

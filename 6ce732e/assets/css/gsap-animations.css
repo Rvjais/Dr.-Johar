@@ -255,6 +255,40 @@ html.lenis, html.lenis body {
   filter: drop-shadow(0 0 6px rgba(237, 180, 165, 0.7));
 }
 
+/* ── Care Journey Visual Media ── */
+.journey-card__media {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 0 0 22px;
+  border: 1px solid rgba(158, 81, 69, 0.12);
+  box-shadow: 0 8px 24px rgba(46, 34, 44, 0.08);
+  background: var(--cream-2, #f5f2ee);
+}
+
+.journey-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.journey-grid article:hover .journey-card__media img {
+  transform: scale(1.06);
+}
+
+.journey-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(41, 38, 46, 0.22) 100%);
+  pointer-events: none;
+}
+
 /* ── 11. Multi-Location 3-Image Stack ────────────────────────── */
 .location-photo {
   position: relative !important;
@@ -374,7 +408,7 @@ html.lenis, html.lenis body {
 .milestones-showcase {
   margin-top: 3.5rem;
   padding-top: 3rem;
-  border-top: 1px solid rgba(158, 81, 69, 0.18);
+  border-top: 1px solid rgba(237, 180, 165, 0.22);
 }
 
 .milestones-head {
@@ -382,21 +416,27 @@ html.lenis, html.lenis body {
 }
 
 .milestones-head .kicker {
-  color: var(--gold, #9e5145);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  color: #edb4a5 !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
   display: block;
 }
 
 .milestones-head h3 {
-  font-family: var(--serif, "Instrument Serif", Georgia, serif);
-  font-size: 2.2rem;
-  font-weight: 400;
-  line-height: 1.25;
-  color: var(--ink, #29262e);
+  font-family: var(--serif, "Instrument Serif", Georgia, serif) !important;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.22 !important;
+  color: #ffffff !important;
   margin-top: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.stories .story-note {
+  color: rgba(255, 255, 255, 0.65) !important;
+  margin-top: 2rem;
 }
 
 .milestones-grid {
