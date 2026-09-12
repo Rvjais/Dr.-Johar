@@ -1,6 +1,6 @@
 /**
  * Kratam Hospital – GSAP Premium Animation Engine
- * Cinematic, GSAP-powered animations with ScrollTrigger.
+ * Cinematic, GSAP-powered animations with ScrollTrigger & Lenis.
  * Requires: gsap.min.js + ScrollTrigger.min.js loaded before this file.
  */
 (function () {
@@ -26,16 +26,15 @@
 
   /** Remove old animation systems so they don't fight GSAP */
   function disableLegacy() {
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
       el.classList.remove('reveal', 'reveal-stagger', 'is-visible');
     });
-    document.querySelectorAll('.hero-entry').forEach(el => {
+    document.querySelectorAll('.hero-entry').forEach(function (el) {
       el.style.animation = 'none';
       el.style.opacity = '';
     });
-    // Remove anim classes from previous CSS-only system
-    document.querySelectorAll('[class*="anim-"]').forEach(el => {
-      [...el.classList].filter(c => c.startsWith('anim-')).forEach(c => el.classList.remove(c));
+    document.querySelectorAll('[class*="anim-"]').forEach(function (el) {
+      [...el.classList].filter(function (c) { return c.startsWith('anim-'); }).forEach(function (c) { el.classList.remove(c); });
     });
   }
 
@@ -45,13 +44,15 @@
    */
   function splitLines(el) {
     if (!el) return [];
-    const html = el.innerHTML;
-    const frags = html.split(/<br\s*\/?>/gi);
+    var html = el.innerHTML;
+    var frags = html.split(/<br\s*\/?>/gi);
     el.setAttribute('aria-label', el.textContent);
     el.innerHTML = frags
-      .map(f => '<div class="ln-mask" style="overflow:hidden;display:block">' +
-                '<div class="ln-inner" style="display:block;will-change:transform">' +
-                f.trim() + '</div></div>')
+      .map(function (f) {
+        return '<div class="ln-mask" style="overflow:hidden;display:block">' +
+               '<div class="ln-inner" style="display:block;will-change:transform">' +
+               f.trim() + '</div></div>';
+      })
       .join('');
     return el.querySelectorAll('.ln-inner');
   }
@@ -62,7 +63,23 @@
   }
 
   /* ================================================================
-     1. HERO – Cinematic entrance sequence
+     00. SCROLL PROGRESS BAR
+  ================================================================ */
+  function scrollProgressBar() {
+    var bar = document.getElementById('scrollProgressBar');
+    if (!bar) return;
+
+    ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: function (self) {
+        bar.style.width = (self.progress * 100).toFixed(2) + '%';
+      }
+    });
+  }
+
+  /* ================================================================
+     1. HERO – Cinematic entrance sequence + 3D Mouse Parallax
   ================================================================ */
   function heroEntrance() {
     var hero = document.querySelector('.studio-hero');
@@ -89,7 +106,7 @@
       }, 0.2);
     }
 
-    /* ── H1: line-by-line mask reveal (THE premium effect) ── */
+    /* ── H1: line-by-line mask reveal ── */
     var h1 = hero.querySelector('h1');
     if (h1) {
       var lines = splitLines(h1);
@@ -125,7 +142,6 @@
         duration: 1.8, ease: 'elastic.out(1, 0.4)'
       }, 0.65);
 
-      // Continuous slow rotation on the SVG text
       var sealSvg = seal.querySelector('svg');
       if (sealSvg) {
         gsap.to(sealSvg, {
@@ -144,21 +160,20 @@
       }, 0.95);
     }
 
-    /* ── Footnote ── */
+    /* ── Footnote & Caption ── */
     var fn = hero.querySelector('.hero-footnote');
     if (fn) {
       gsap.set(fn, { opacity: 0, x: -30 });
       tl.to(fn, { opacity: 1, x: 0, duration: 0.9 }, 1.25);
     }
 
-    /* ── Hero caption ── */
     var caption = hero.querySelector('.hero-caption');
     if (caption) {
       gsap.set(caption, { opacity: 0 });
       tl.to(caption, { opacity: 1, duration: 1.4 }, 1.6);
     }
 
-    /* ── Scroll: hero image parallax ── */
+    /* ── Scroll Parallax on hero image ── */
     if (img) {
       gsap.to(img, {
         yPercent: 20, ease: 'none',
@@ -166,16 +181,52 @@
           trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.8
         }
       });
+      gsap.to(img, { scale: 1, duration: 25, ease: 'none', delay: 2.6 });
     }
 
-    /* ── Continuous Ken Burns on hero image ── */
-    if (img) {
-      gsap.to(img, { scale: 1, duration: 25, ease: 'none', delay: 2.6 });
+    /* ── Interactive 3D Mouse Parallax Layering ── */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      var heroPhoto = hero.querySelector('.hero-photograph');
+      hero.addEventListener('pointermove', function (e) {
+        var rect = hero.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        if (heroPhoto) {
+          gsap.to(heroPhoto, {
+            rotationY: x * 7,
+            rotationX: y * -5,
+            duration: 0.6,
+            ease: 'power2.out',
+            transformPerspective: 1000
+          });
+        }
+        if (docCard) {
+          gsap.to(docCard, {
+            x: x * -15,
+            y: y * -15,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        }
+        if (seal) {
+          gsap.to(seal, {
+            x: x * 18,
+            y: y * 18,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        }
+      });
+      hero.addEventListener('pointerleave', function () {
+        if (heroPhoto) gsap.to(heroPhoto, { rotationY: 0, rotationX: 0, duration: 1, ease: 'elastic.out(1, 0.4)' });
+        if (docCard) gsap.to(docCard, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.4)' });
+        if (seal) gsap.to(seal, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.4)' });
+      });
     }
   }
 
   /* ================================================================
-     2. PRACTICE FACTS – Counter with flair
+     2. PRACTICE FACTS – Smooth Counter Roll-up with Bounce
   ================================================================ */
   function practiceFacts() {
     var section = document.querySelector('.practice-facts');
@@ -201,20 +252,23 @@
     }
 
     counters.forEach(function (el) {
-      var target = parseInt(el.getAttribute('data-count'), 10);
-      el.removeAttribute('data-count'); // prevent old counter in main.js
+      var raw = el.getAttribute('data-count');
+      if (!raw) return;
+      var target = parseFloat(raw);
+      if (isNaN(target)) return;
+      var suffix = el.getAttribute('data-suffix') || '';
       var proxy = { v: 0 };
 
       ScrollTrigger.create({
         trigger: el, start: 'top 82%',
         onEnter: function () {
           gsap.to(proxy, {
-            v: target, duration: 2.4, ease: 'power2.out',
-            onUpdate: function () { el.textContent = Math.round(proxy.v); },
+            v: target, duration: 2.2, ease: 'power2.out',
+            onUpdate: function () { el.textContent = Math.round(proxy.v).toLocaleString('en-IN') + suffix; },
             onComplete: function () {
               gsap.fromTo(el,
                 { scale: 1 },
-                { scale: 1.3, duration: 0.3, yoyo: true, repeat: 1, ease: 'power2.inOut' }
+                { scale: 1.25, duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.inOut' }
               );
             }
           });
@@ -225,7 +279,7 @@
   }
 
   /* ================================================================
-     3. SECTION HEADINGS – Line-by-line reveal (global)
+     3. SECTION HEADINGS – Line-by-line reveal
   ================================================================ */
   function sectionHeadings() {
     document.querySelectorAll('.studio-heading').forEach(function (heading) {
@@ -267,7 +321,7 @@
   }
 
   /* ================================================================
-     4. DISCOVERY – Tabs section
+     4. DISCOVERY – Tabs & Panel Reveal
   ================================================================ */
   function discovery() {
     var section = document.querySelector('.discovery');
@@ -282,7 +336,6 @@
       });
     }
 
-    // Active panel content slide
     var activePanel = section.querySelector('.discovery-panel.is-active');
     if (activePanel) {
       var content = activePanel.querySelector('.discovery-content');
@@ -303,7 +356,6 @@
       }
     }
 
-    // Image parallax on all discovery images
     section.querySelectorAll('.discovery-image img').forEach(function (img) {
       gsap.to(img, {
         yPercent: -10, ease: 'none',
@@ -316,13 +368,12 @@
   }
 
   /* ================================================================
-     5. SURGEON STORY – Split-screen dramatic reveal
+     5. SURGEON STORY – Split-Screen Reveal
   ================================================================ */
   function surgeonStory() {
     var section = document.querySelector('.surgeon-story');
     if (!section) return;
 
-    /* Portrait – horizontal clip-path wipe (left to right) */
     var portrait = section.querySelector('.surgeon-portrait');
     if (portrait) {
       gsap.set(portrait, { clipPath: 'inset(0 100% 0 0)' });
@@ -334,7 +385,6 @@
 
       var pImg = portrait.querySelector('img');
       if (pImg) {
-        // Parallax
         gsap.to(pImg, {
           yPercent: -12, ease: 'none',
           scrollTrigger: {
@@ -362,7 +412,6 @@
       }
     }
 
-    /* Copy – slide from right */
     var copy = section.querySelector('.surgeon-copy');
     if (copy) {
       var intro = copy.querySelector('.surgeon-intro');
@@ -401,17 +450,33 @@
   }
 
   /* ================================================================
-     6. CARE JOURNEY – 3D staggered cards
+     6. CARE JOURNEY – 3D Staggered Cards + SVG Connecting Path
   ================================================================ */
   function careJourney() {
     var section = document.querySelector('.care-journey');
     if (!section) return;
 
+    var svgPath = section.querySelector('.journey-svg-path');
+    if (svgPath) {
+      var pathLen = svgPath.getTotalLength ? svgPath.getTotalLength() : 900;
+      gsap.set(svgPath, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
+      gsap.to(svgPath, {
+        strokeDashoffset: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          end: 'center center',
+          scrub: 0.8
+        }
+      });
+    }
+
     var cards = section.querySelectorAll('.journey-grid article');
     if (cards.length) {
       gsap.from(cards, {
-        y: 90, opacity: 0, rotationX: 15, scale: 0.88,
-        duration: 1.1, stagger: 0.22, ease: 'power3.out',
+        y: 90, opacity: 0, rotationX: 18, scale: 0.86,
+        duration: 1.15, stagger: 0.22, ease: 'power3.out',
         scrollTrigger: st(section, 'top 72%')
       });
     }
@@ -427,13 +492,12 @@
   }
 
   /* ================================================================
-     7. SPECIALISTS – Dramatic card entrance with 3D
+     7. SPECIALISTS – 3D Entrance + Spotlight Sheen
   ================================================================ */
   function specialists() {
     var section = document.querySelector('.specialists');
     if (!section) return;
 
-    /* Watermark parallax */
     var watermark = section.querySelector('.specialists-watermark');
     if (watermark) {
       gsap.to(watermark, {
@@ -445,7 +509,6 @@
       });
     }
 
-    /* Cards – 3D rotation + scale entrance */
     var cards = section.querySelectorAll('.specialist-card');
     if (cards.length) {
       gsap.from(cards, {
@@ -456,21 +519,34 @@
       });
     }
 
-    /* Hover image zoom */
     cards.forEach(function (card) {
       var cImg = card.querySelector('img');
-      if (!cImg) return;
-      card.addEventListener('mouseenter', function () {
-        gsap.to(cImg, { scale: 1.1, duration: 0.7, ease: 'power2.out' });
-      });
-      card.addEventListener('mouseleave', function () {
-        gsap.to(cImg, { scale: 1, duration: 0.7, ease: 'power2.out' });
-      });
+      if (!card.querySelector('.card-spotlight')) {
+        var spotlight = document.createElement('div');
+        spotlight.className = 'card-spotlight';
+        card.appendChild(spotlight);
+      }
+      card.addEventListener('pointermove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+      }, { passive: true });
+
+      if (cImg) {
+        card.addEventListener('mouseenter', function () {
+          gsap.to(cImg, { scale: 1.1, duration: 0.7, ease: 'power2.out' });
+        });
+        card.addEventListener('mouseleave', function () {
+          gsap.to(cImg, { scale: 1, duration: 0.7, ease: 'power2.out' });
+        });
+      }
     });
   }
 
   /* ================================================================
-     8. PATIENT STORIES
+     8. PATIENT VOICES & CLINICAL MILESTONES SHOWCASE
   ================================================================ */
   function patientStories() {
     var section = document.querySelector('.stories');
@@ -509,10 +585,31 @@
         scrollTrigger: st(section, 'top 74%')
       });
     }
+
+    /* Authentic clinical milestones */
+    var showcase = section.querySelector('.milestones-showcase');
+    if (showcase) {
+      var head = showcase.querySelector('.milestones-head');
+      if (head) {
+        gsap.from(head, {
+          y: 40, opacity: 0, duration: 1,
+          scrollTrigger: st(showcase, 'top 78%')
+        });
+      }
+
+      var milestoneCards = showcase.querySelectorAll('.milestone-card');
+      if (milestoneCards.length) {
+        gsap.from(milestoneCards, {
+          y: 80, opacity: 0, scale: 0.88, rotationX: 12,
+          duration: 1.1, stagger: 0.2, ease: 'power3.out',
+          scrollTrigger: st(showcase, 'top 72%')
+        });
+      }
+    }
   }
 
   /* ================================================================
-     9. JOURNAL
+     9. JOURNAL – Diagonal Reveal & Parallax
   ================================================================ */
   function journalSection() {
     var section = document.querySelector('.journal');
@@ -537,7 +634,6 @@
       });
     }
 
-    // Image parallax
     section.querySelectorAll('.journal-image img, .journal-side img').forEach(function (jImg) {
       gsap.to(jImg, {
         yPercent: -12, ease: 'none',
@@ -550,13 +646,12 @@
   }
 
   /* ================================================================
-     10. FAQ
+     10. FAQ – Accordion Cascade
   ================================================================ */
   function faqSection() {
     var section = document.querySelector('.studio-faq');
     if (!section) return;
 
-    // Left column elements
     var leftCol = section.querySelector('.faq-layout > div:first-child');
     if (leftCol) {
       var kick = leftCol.querySelector('.kicker');
@@ -585,7 +680,6 @@
       }
     }
 
-    // FAQ items cascade
     var details = section.querySelectorAll('.native-faq details');
     if (details.length) {
       gsap.from(details, {
@@ -597,7 +691,7 @@
   }
 
   /* ================================================================
-     11. LOCATIONS
+     11. LOCATIONS – 3 Distinct Location Switcher with Cross-Dissolve
   ================================================================ */
   function locationsSection() {
     var section = document.querySelector('.locations-section');
@@ -612,30 +706,68 @@
       });
     }
 
-    var photo = section.querySelector('.location-photo');
-    if (photo) {
-      gsap.set(photo, { clipPath: 'inset(100% 0 0 0)' });
-      gsap.to(photo, {
+    var photoStack = section.querySelector('#locationPhotoStack') || section.querySelector('.location-photo');
+    if (photoStack) {
+      gsap.set(photoStack, { clipPath: 'inset(100% 0 0 0)' });
+      gsap.to(photoStack, {
         clipPath: 'inset(0% 0 0 0)', duration: 1.4,
         ease: 'power4.inOut',
-        scrollTrigger: st(photo, 'top 80%')
+        scrollTrigger: st(photoStack, 'top 80%')
       });
+    }
 
-      var locImg = photo.querySelector('img');
-      if (locImg) {
-        gsap.to(locImg, {
-          yPercent: -14, ease: 'none',
+    /* Interactive 3-Location Image Switcher */
+    var tabBtns = section.querySelectorAll('[data-studio-tab]');
+    var photoItems = section.querySelectorAll('.location-photo-item');
+
+    function switchLocationPhoto(locKey) {
+      photoItems.forEach(function (item) {
+        var isTarget = item.getAttribute('data-location-img') === locKey;
+        if (isTarget && !item.classList.contains('is-active')) {
+          item.classList.add('is-active');
+          var img = item.querySelector('img');
+          var info = item.querySelector('.location-photo-info');
+          if (img) {
+            gsap.fromTo(img,
+              { scale: 1.18, filter: 'blur(8px) brightness(0.7)' },
+              { scale: 1, filter: 'blur(0px) brightness(1)', duration: 0.85, ease: 'power3.out' }
+            );
+          }
+          if (info) {
+            gsap.fromTo(info,
+              { y: 30, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.65, delay: 0.2, ease: 'power3.out' }
+            );
+          }
+        } else if (!isTarget && item.classList.contains('is-active')) {
+          item.classList.remove('is-active');
+        }
+      });
+    }
+
+    tabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var locKey = btn.getAttribute('data-studio-tab');
+        if (locKey) switchLocationPhoto(locKey);
+      });
+    });
+
+    photoItems.forEach(function (item) {
+      var img = item.querySelector('img');
+      if (img) {
+        gsap.to(img, {
+          yPercent: -12, ease: 'none',
           scrollTrigger: {
-            trigger: photo, start: 'top bottom',
-            end: 'bottom top', scrub: 0.7
+            trigger: photoStack || item,
+            start: 'top bottom', end: 'bottom top', scrub: 0.7
           }
         });
       }
-    }
+    });
   }
 
   /* ================================================================
-     12. CONSULTATION CTA – Dramatic entrance
+     12. CONSULTATION CTA
   ================================================================ */
   function consultationCTA() {
     var section = document.querySelector('.consultation-invitation');
@@ -677,7 +809,6 @@
       });
     }
 
-    // Flower – continuous rotation + elastic entrance
     var flower = section.querySelector('.invitation-flower');
     if (flower) {
       gsap.from(flower, {
@@ -692,7 +823,7 @@
   }
 
   /* ================================================================
-     13. FOOTER – Stagger entrance
+     13. FOOTER
   ================================================================ */
   function footerSection() {
     var ft = document.querySelector('.studio-footer');
@@ -726,7 +857,7 @@
   }
 
   /* ================================================================
-     14. MAGNETIC BUTTONS – Cursor-following effect
+     14. MAGNETIC BUTTONS
   ================================================================ */
   function magneticButtons() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -739,7 +870,7 @@
         var dx = (e.clientX - cx) * 0.18;
         var dy = (e.clientY - cy) * 0.18;
         gsap.to(btn, { x: dx, y: dy, duration: 0.35, ease: 'power2.out' });
-      });
+      }, { passive: true });
       btn.addEventListener('pointerleave', function () {
         gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.35)' });
       });
@@ -747,13 +878,13 @@
   }
 
   /* ================================================================
-     15. 3D CARD TILT – Perspective hover effect
+     15. 3D CARD TILT
   ================================================================ */
   function cardTilt() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     var tiltTargets = document.querySelectorAll(
-      '.specialist-card, .journey-grid article, .journal-feature, .story-video'
+      '.specialist-card, .journey-grid article, .journal-feature, .story-video, .milestone-card'
     );
 
     tiltTargets.forEach(function (card) {
@@ -766,7 +897,7 @@
           duration: 0.4, ease: 'power2.out',
           transformPerspective: 800
         });
-      });
+      }, { passive: true });
       card.addEventListener('pointerleave', function () {
         gsap.to(card, {
           rotationY: 0, rotationX: 0,
@@ -777,7 +908,7 @@
   }
 
   /* ================================================================
-     16. RIPPLE EFFECT – Click feedback on buttons
+     16. RIPPLE EFFECT
   ================================================================ */
   function rippleEffect() {
     document.querySelectorAll('.btn').forEach(function (btn) {
@@ -807,7 +938,7 @@
   }
 
   /* ================================================================
-     17. FLOATING ELEMENTS – Gentle ambient motion
+     17. FLOATING ELEMENTS
   ================================================================ */
   function floatingElements() {
     document.querySelectorAll('.small-cross, .portrait-marker').forEach(function (el, i) {
@@ -827,7 +958,7 @@
   }
 
   /* ================================================================
-     18. SMOOTH HEADER – Progressive backdrop blur on scroll
+     18. SMOOTH HEADER
   ================================================================ */
   function smoothHeader() {
     var header = document.querySelector('.studio-header');
@@ -847,15 +978,14 @@
   }
 
   /* ================================================================
-     19. GENERAL PARALLAX – Images throughout the site
+     19. GENERAL PARALLAX
   ================================================================ */
   function generalParallax() {
     var parallaxTargets = document.querySelectorAll(
-      '.location-photo img, .story-video img'
+      '.story-video img'
     );
 
     parallaxTargets.forEach(function (el) {
-      // Skip if already has a ScrollTrigger from section-specific code
       if (el.dataset.parallaxDone) return;
       el.dataset.parallaxDone = '1';
 
@@ -871,13 +1001,11 @@
 
   /* ================================================================
      20. SCRUBBED TEXT SCALE on Consultation Section
-         Text scales down from larger as user scrolls through
   ================================================================ */
   function scrubbedCTA() {
     var section = document.querySelector('.consultation-invitation');
     if (!section) return;
 
-    // Scale the entire container content with scrub for a cinematic feel
     gsap.fromTo(section.querySelector('.container'), 
       { scale: 0.92, opacity: 0.7 },
       {
@@ -943,7 +1071,7 @@
       setRingY(e.clientY);
     }, { passive: true });
 
-    var hoverSelectors = 'a, button, .btn, .specialist-card, .journey-grid article, .journal-feature, .story-video, input, select, textarea, [role="tab"], summary';
+    var hoverSelectors = 'a, button, .btn, .specialist-card, .journey-grid article, .journal-feature, .story-video, .milestone-card, input, select, textarea, [role="tab"], summary';
     document.addEventListener('mouseover', function (e) {
       if (e.target && e.target.closest(hoverSelectors)) {
         document.body.classList.add('cursor-active');
@@ -1003,10 +1131,9 @@
   ================================================================ */
   function cardSpecular() {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var cards = document.querySelectorAll('.specialist-card, .journey-grid article, .journal-feature');
+    var cards = document.querySelectorAll('.specialist-card, .journey-grid article, .journal-feature, .milestone-card');
     cards.forEach(function (card) {
       if (!card.querySelector('.card-specular-shine')) {
-        var shine = document.createElement('div');
         var shine = document.createElement('span');
         shine.className = 'card-specular-shine';
         shine.style.cssText = 'position:absolute!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important;z-index:4!important;border-radius:inherit!important;';
@@ -1027,6 +1154,9 @@
   ================================================================ */
   function init() {
     disableLegacy();
+
+    // Top scroll reading progress
+    scrollProgressBar();
 
     // Smooth inertia scroll
     initLenis();

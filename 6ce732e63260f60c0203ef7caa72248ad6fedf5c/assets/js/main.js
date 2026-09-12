@@ -210,12 +210,15 @@
 
   /* ---------- Counters ---------- */
   const counters = $$('[data-count]');
-  if (counters.length && 'IntersectionObserver' in window && motionEnabled()) {
+  if (typeof gsap === 'undefined' && counters.length && 'IntersectionObserver' in window && motionEnabled()) {
     const cio = new IntersectionObserver(entries => {
       entries.forEach(en => {
         if (!en.isIntersecting) return;
         const el = en.target;
-        const target = parseFloat(el.dataset.count);
+        const raw = el.dataset.count;
+        if (!raw) return;
+        const target = parseFloat(raw);
+        if (isNaN(target)) return;
         const suffix = el.dataset.suffix || '';
         const dur = 1400;
         const start = performance.now();

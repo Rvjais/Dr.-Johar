@@ -3,6 +3,20 @@
    Companion styles for GSAP + ScrollTrigger + Lenis
 ================================================================ */
 
+/* ── 0. Top Scroll Progress Bar ──────────────────────────────── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #9e5145, #edb4a5, #d4af37);
+  z-index: 99999;
+  box-shadow: 0 0 10px rgba(237, 180, 165, 0.85);
+  pointer-events: none;
+  transition: width 0.05s ease-out;
+}
+
 /* ── 1. Lenis Smooth Scroll Integration ──────────────────────── */
 html.lenis, html.lenis body {
   height: auto;
@@ -33,7 +47,6 @@ html.lenis, html.lenis body {
 .discovery-image,
 .discovery-image img,
 .location-photo,
-.location-photo img,
 .consultation-invitation,
 .story-video,
 .story-video img,
@@ -128,26 +141,19 @@ html.lenis, html.lenis body {
   }
 }
 
-/* ── 6. 3D Specular Lighting for Cards ────────────────────────── */
+/* ── 6. 3D Specular Lighting & Spotlight for Cards ───────────── */
 .specialist-card,
 .journey-grid article,
 .journal-feature,
-.story-video {
+.story-video,
+.milestone-card {
   position: relative;
   transform-style: preserve-3d;
   perspective: 1000px;
 }
 
-.card-specular-shine {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%);
 .card-specular-shine,
-.specialist-card > .card-specular-shine,
-.journey-grid article > .card-specular-shine,
-.journal-feature > .card-specular-shine {
+.card-spotlight {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
@@ -156,15 +162,25 @@ html.lenis, html.lenis body {
   border-radius: inherit !important;
   pointer-events: none !important;
   background-color: transparent !important;
-  background-image: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%) !important;
   opacity: 0;
   transition: opacity 0.35s ease;
   z-index: 4;
 }
 
+.card-specular-shine {
+  background-image: radial-gradient(circle 300px at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.22) 0%, transparent 70%) !important;
+}
+
+.card-spotlight {
+  background-image: radial-gradient(circle 240px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(237, 180, 165, 0.25) 0%, transparent 75%) !important;
+  z-index: 5 !important;
+}
+
 .specialist-card:hover .card-specular-shine,
 .journey-grid article:hover .card-specular-shine,
-.journal-feature:hover .card-specular-shine {
+.journal-feature:hover .card-specular-shine,
+.milestone-card:hover .card-specular-shine,
+.specialist-card:hover .card-spotlight {
   opacity: 1;
 }
 
@@ -218,7 +234,245 @@ html.lenis, html.lenis body {
   will-change: transform;
 }
 
-/* ── 10. Consultation Invitation Deep Glow ───────────────────── */
+/* ── 10. Care Journey SVG Connecting Timeline ─────────────────── */
+.journey-connector {
+  width: 100%;
+  height: 28px;
+  margin: 0 auto 1.75rem;
+  overflow: visible;
+}
+
+.journey-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.journey-svg-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  filter: drop-shadow(0 0 6px rgba(237, 180, 165, 0.7));
+}
+
+/* ── 11. Multi-Location 3-Image Stack ────────────────────────── */
+.location-photo {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: var(--radius, 24px) !important;
+  min-height: 480px;
+  background-color: #1f1d23;
+}
+
+.location-photo-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.08);
+}
+
+.location-photo-item.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.location-photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+}
+
+.location-photo-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem 2rem 2rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(25, 23, 28, 0.82) 40%, rgba(25, 23, 28, 0.95) 100%);
+  color: #fff;
+  z-index: 3;
+}
+
+.location-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #edb4a5;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.location-photo-info p {
+  font-size: 0.98rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.location-photo-tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(41, 38, 46, 0.8);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(237, 180, 165, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 4;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.location-photo-tag:hover {
+  background: rgba(158, 81, 69, 0.9);
+  border-color: #edb4a5;
+  color: #fff;
+}
+
+/* ── 12. Clinical Milestones & Patient Voices Showcase ────────── */
+.milestones-showcase {
+  margin-top: 3.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(158, 81, 69, 0.18);
+}
+
+.milestones-head {
+  margin-bottom: 2.25rem;
+}
+
+.milestones-head .kicker {
+  color: var(--gold, #9e5145);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.milestones-head h3 {
+  font-family: var(--serif, "Instrument Serif", Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink, #29262e);
+  margin-top: 0.5rem;
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 900px) {
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.milestone-card {
+  background: #fff;
+  border: 1px solid rgba(158, 81, 69, 0.15);
+  border-radius: var(--radius, 20px);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.milestone-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(158, 81, 69, 0.14);
+}
+
+.milestone-card__visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #29262e;
+}
+
+.milestone-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.milestone-card:hover .milestone-card__visual img {
+  transform: scale(1.08);
+}
+
+.milestone-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(41, 38, 46, 0.85);
+  backdrop-filter: blur(8px);
+  color: #edb4a5;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(237, 180, 165, 0.3);
+}
+
+.milestone-card__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.milestone-card__body h4 {
+  font-family: var(--sans, 'DM Sans', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink, #29262e);
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.milestone-card__body p {
+  font-size: 0.92rem;
+  color: var(--muted, #625d6b);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.milestone-team {
+  font-size: 0.78rem;
+  color: var(--gold, #9e5145);
+  font-weight: 600;
+  display: block;
+}
+
+/* ── 13. Consultation Invitation Deep Glow ───────────────────── */
 .consultation-invitation {
   position: relative;
   overflow: hidden;
@@ -236,4 +490,3 @@ html.lenis, html.lenis body {
   pointer-events: none;
   border-radius: 50%;
 }
-
