@@ -324,29 +324,50 @@ html.lenis, html.lenis body {
 }
 
 .location-photo-tag {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: rgba(41, 38, 46, 0.8);
-  backdrop-filter: blur(10px);
-  color: #fff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(237, 180, 165, 0.4);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  z-index: 4;
-  text-decoration: none;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  position: absolute !important;
+  top: 1.25rem !important;
+  right: 1.25rem !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  max-width: max-content !important;
+  height: auto !important;
+  background: rgba(25, 23, 28, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #ffffff !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  padding: 0.55rem 1.15rem !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(237, 180, 165, 0.45) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  z-index: 5 !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.location-photo-tag .icon {
+  width: 14px !important;
+  height: 14px !important;
+  transition: transform 0.3s ease;
 }
 
 .location-photo-tag:hover {
-  background: rgba(158, 81, 69, 0.9);
-  border-color: #edb4a5;
-  color: #fff;
+  background: #9e5145 !important;
+  border-color: #edb4a5 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(158, 81, 69, 0.45) !important;
+}
+
+.location-photo-tag:hover .icon {
+  transform: translate(2px, -2px);
 }
 
 /* ── 12. Clinical Milestones & Patient Voices Showcase ────────── */
