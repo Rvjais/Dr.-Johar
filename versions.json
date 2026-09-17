@@ -1,12 +1,21 @@
 [
   {
+    "commit": "5b6a8bb09e8c6b2ea4712e5269ea67e6852a846c",
+    "short_hash": "5b6a8bb",
+    "title": "Pixel-perfect KRTAM Skin Clinic Mockup Redesign",
+    "description": "Pixel-perfect KRTAM Skin Clinic Mockup Redesign",
+    "branch": "main",
+    "date": "2026-09-17",
+    "is_latest": true
+  },
+  {
     "commit": "6ce732e63260f60c0203ef7caa72248ad6fedf5c",
     "short_hash": "6ce732e",
     "title": "Kratam Hospital Rebrand & Mobile Responsive",
     "description": "Full mobile responsiveness overhaul, single-line phone layout, Kratam branding updates, and ?v=2.0 asset cache busters.",
     "branch": "first-commit",
     "date": "2026-09-07",
-    "is_latest": true
+    "is_latest": false
   },
   {
     "commit": "6609d4ea1bcf45512772c0bd37a906c74a4ef3b6",
