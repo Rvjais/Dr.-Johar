@@ -1,12 +1,21 @@
 [
   {
+    "commit": "6dbd8fee571978dd4920f8fbefeb8f4b6f492ccf",
+    "short_hash": "6dbd8fe",
+    "title": "Mockup-exact homepage: fonts, layout, alignment matched to design",
+    "description": "Mockup-exact homepage: fonts, layout, alignment matched to design",
+    "branch": "main",
+    "date": "2026-09-18",
+    "is_latest": true
+  },
+  {
     "commit": "5b6a8bb09e8c6b2ea4712e5269ea67e6852a846c",
     "short_hash": "5b6a8bb",
     "title": "Pixel-perfect KRTAM Skin Clinic Mockup Redesign",
     "description": "Pixel-perfect KRTAM Skin Clinic Mockup Redesign",
     "branch": "main",
     "date": "2026-09-17",
-    "is_latest": true
+    "is_latest": false
   },
   {
     "commit": "6ce732e63260f60c0203ef7caa72248ad6fedf5c",
