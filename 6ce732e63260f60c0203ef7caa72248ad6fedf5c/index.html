@@ -8,11 +8,11 @@
 <meta property="og:title" content="KRTAM Skin Clinic | Reconstruct · Restore · Redefine">
 <meta property="og:description" content="Advanced Plastic, Reconstructive and Aesthetic Care by Dr. Manoj Johar and Team at Max Hospitals, Delhi NCR.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#9e5145">
-<link rel="icon" type="image/png" href="assets/img/mockup/krtam-logo-transparent.png">
+<meta name="theme-color" content="#97733f">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/krtam-mockup.css">
 </head>
 <body>
@@ -24,10 +24,17 @@
      ============================================ -->
 <header class="site-header" id="siteHeader">
   <div class="container site-header__inner">
-    <a href="index.html" class="site-header__brand" aria-label="KRTAM Skin Clinic home">
-      <img src="assets/img/mockup/krtam-logo-transparent.png" alt="KRTAM Skin Clinic" class="site-header__logo">
-      <span class="site-header__tagline">RECONSTRUCT · RESTORE · REDEFINE.</span>
+    <a href="index.html" class="brand site-header__brand" aria-label="KRTAM Skin Clinic home">
+      <span class="brand__row">
+        <img src="assets/img/logo-emblem.png" alt="" class="brand__mark">
+        <span class="brand__text">
+          <span class="brand__name">KRTAM</span>
+          <span class="brand__sub">SKIN CLINIC</span>
+        </span>
+      </span>
+      <span class="brand__tagline">Reconstruct &bull; Restore &bull; Redefine.</span>
     </a>
+    <span class="site-header__divider" aria-hidden="true"></span>
     <nav class="site-header__nav" aria-label="Main navigation">
       <a href="index.html" class="is-active">Home</a>
       <a href="about.html">About</a>
@@ -38,7 +45,7 @@
       <a href="contact.html">Locations</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="appointments.html" class="site-header__cta">Book an Appointment &rarr;</a>
+    <a href="appointments.html" class="site-header__cta">Book an Appointment <span class="arr">&rarr;</span></a>
     <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -50,7 +57,7 @@
   <div class="mobile-drawer__scrim"></div>
   <div class="mobile-drawer__panel">
     <div class="mobile-drawer__head">
-      <img src="assets/img/mockup/krtam-logo-transparent.png" alt="KRTAM Skin Clinic" style="height:34px">
+      <img src="assets/img/logo-emblem.png" alt="KRTAM Skin Clinic">
       <button class="mobile-drawer__close" type="button" aria-label="Close menu">&times;</button>
     </div>
     <nav class="mobile-drawer__nav">
@@ -62,80 +69,97 @@
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Locations</a>
       <a href="contact.html">Contact</a>
-      <a href="appointments.html" class="btn btn--primary" style="margin-top:20px;text-align:center;">Book an Appointment &rarr;</a>
+      <a href="appointments.html" class="btn btn--primary">Book an Appointment <span class="arr">&rarr;</span></a>
     </nav>
   </div>
 </div>
 
 <!-- ============================================
-     SECTION 2: HERO (Exact Mockup Alignment)
+     SECTION 2: HERO
      ============================================ -->
 <section class="hero" id="hero">
   <div class="container hero__container">
     <div class="hero__content">
-      <div class="hero__tag"><span class="tag-bar"></span> SCIENCE MEETS HUMANITY</div>
-      <h1 class="hero__title">
-        Restoring<br>
-        Confidence.<br>
-        <span class="title-gold">Changing Lives.</span>
-      </h1>
-      <p class="hero__subtitle">Advanced Plastic, Reconstructive and Aesthetic Care by Dr. Manoj Johar and Team at Max Hospitals, Delhi NCR.</p>
+      <div class="hero__lead bracket">
+        <div class="hero__tag">SCIENCE MEETS HUMANITY</div>
+        <h1 class="hero__title">
+          Restoring<br>
+          Confidence.<br>
+          <span class="title-gold">Changing Lives.</span>
+        </h1>
+        <p class="hero__subtitle">Advanced Plastic, Reconstructive and Aesthetic Care<br class="br-d"> by Dr. Manoj Johar and Team at Max Hospitals,<br class="br-d"> Delhi NCR.</p>
+      </div>
       <div class="hero__buttons">
-        <a href="appointments.html" class="btn btn--primary">Book a Consultation &rarr;</a>
+        <a href="appointments.html" class="btn btn--primary">Book a Consultation <span class="arr">&rarr;</span></a>
         <a href="about.html" class="btn btn--outline">Explore Our Approach</a>
       </div>
       <div class="hero__badges">
         <div class="hero__badge">
           <div class="hero__badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="17" r="13"/><path d="M20 23.5s-6.5-3.9-6.5-8.2a3.5 3.5 0 0 1 6.5-1.9 3.5 3.5 0 0 1 6.500 1.9c0 4.300-6.500 8.200-6.500 8.200z"/><path d="M13 28.500 20 37l7-8.500"/></svg>
           </div>
           <span class="hero__badge-text">Compassionate<br>Care</span>
         </div>
         <div class="hero__badge">
           <div class="hero__badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="11" r="5"/><circle cx="8.500" cy="14" r="4"/><circle cx="31.500" cy="14" r="4"/><path d="M11 32v-5a9 9 0 0 1 18 0v5z"/><path d="M1.500 30v-4a7 7 0 0 1 9.500-6.500A11 11 0 0 0 9 27v3zM38.500 30v-4a7 7 0 0 0-9.500-6.500A11 11 0 0 1 31 27v3z"/></svg>
           </div>
           <span class="hero__badge-text">Advanced<br>Surgical Expertise</span>
         </div>
         <div class="hero__badge">
           <div class="hero__badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 35V7h14v28M5 35V17h8M27 13h8v22M3 35h34"/><path d="M20 11v6M17 14h6M17.500 22h5M17.500 27h5M8.500 22v.01M8.500 27v.01M31 19v.01M31 24v.01M31 29v.01"/></svg>
           </div>
-          <span class="hero__badge-text">At Max Hospitals<br>(Delhi/NCR)</span>
+          <span class="hero__badge-text">At Max Hospitals<br>(Delhi NCR)</span>
         </div>
         <div class="hero__badge">
           <div class="hero__badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 34S5 25.500 5 15a8 8 0 0 1 15-3.800A8 8 0 0 1 35 15c0 10.500-15 19-15 19z"/></svg>
           </div>
           <span class="hero__badge-text">Trusted by<br>Thousands</span>
         </div>
       </div>
     </div>
+
+    <div class="hero__center-words" aria-hidden="true">
+      <span>Science</span>
+      <span>Art</span>
+      <span>Humanity</span>
+      <span>In Harmony</span>
+    </div>
+
     <div class="hero__quote-box">
-      <span class="hero__quote-mark">&ldquo;</span>
-      <p class="hero__quote-text">Every face,<br>every form,<br>every story<br><em>matters.</em>&rdquo;</p>
+      <span class="hero__quote-mark" aria-hidden="true">&ldquo;</span>
+      <p class="hero__quote-text">Every face,<br>every form,<br>every story<br><em>matters.&rdquo;</em></p>
       <cite class="hero__quote-author">&mdash; DR. MANOJ JOHAR</cite>
     </div>
+
+    <a href="#philosophy" class="hero__scroll" aria-label="Scroll to next section">
+      <span class="hero__scroll-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6.500 12.500 12 18l5.500-5.500"/></svg>
+      </span>
+      <span>SCROLL</span>
+    </a>
   </div>
 </section>
 
 <!-- ============================================
-     SECTION 3: PHILOSOPHY (Full Panoramic Background)
+     SECTION 3: PHILOSOPHY
      ============================================ -->
 <section class="philosophy" id="philosophy">
   <div class="container philosophy__container">
-    <div class="philosophy__content">
-      <div class="section-tag"><span class="tag-bar"></span> OUR PHILOSOPHY</div>
-      <h2 class="philosophy__title">More Than Procedures.<br><span class="title-gold">A More Human Approach.</span></h2>
-      <p class="philosophy__text">At KRTAM, we believe in combining science, surgical skill and human understanding to help you look better, feel stronger and live more confidently.</p>
-      <a href="vision-mission.html" class="philosophy__link">Our Philosophy &rarr;</a>
+    <div class="philosophy__content bracket">
+      <div class="section-tag">OUR PHILOSOPHY</div>
+      <h2 class="philosophy__title"><span>More Than Procedures.</span><br><span>A More Human Approach.</span></h2>
+      <p class="philosophy__text">At KRTAM, we believe in combining science, surgical skill and<br class="br-d"> human understanding to help you look better, feel stronger<br class="br-d"> and live more confidently.</p>
+      <a href="vision-mission.html" class="text-link philosophy__link"><span>Our Philosophy</span><span class="arr">&rarr;</span></a>
     </div>
-    <div class="vertical-text" aria-hidden="true">
-      <span>FORM</span>
-      <span>FUNCTION</span>
-      <span>FREEDOM</span>
-      <span>A BRIGHTER</span>
-      <span>TOMORROW</span>
+    <div class="side-words" aria-hidden="true">
+      <span>Form</span>
+      <span>Function</span>
+      <span>Freedom</span>
+      <span>A Brighter</span>
+      <span>Tomorrow</span>
     </div>
   </div>
 </section>
@@ -148,49 +172,61 @@
     <div class="services__header">
       <div>
         <div class="section-tag"><span class="tag-bar"></span> OUR SERVICES</div>
-        <h2 class="services__title">Comprehensive Care<br><span class="title-gold">for Every Journey</span></h2>
+        <h2 class="services__title">Comprehensive Care<br>for Every Journey</h2>
       </div>
-      <div>
-        <p class="services__intro">From reconstructive procedures to advanced aesthetic treatments, we offer personalized, evidence-based solutions tailored to you.</p>
-        <a href="treatments.html" class="services__link">View All Services &rarr;</a>
+      <div class="services__aside">
+        <p class="services__intro">From reconstructive procedures to advanced aesthetic treatments,<br class="br-d"> we offer personalized, evidence-based solutions tailored to you.</p>
+        <a href="treatments.html" class="text-link services__link"><span>View All Services</span><span class="arr">&rarr;</span></a>
       </div>
     </div>
     <div class="services__grid">
       <div class="service-card">
-        <img src="assets/img/mockup/service-1-facial.png" alt="Facial Rejuvenation" class="service-card__image">
-        <h3 class="service-card__title">Facial<br>Rejuvenation</h3>
-        <p class="service-card__tagline">Look refreshed. Be you.</p>
-        <a href="treatments/face-care-rejuvenation.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-1.jpg" alt="Facial Rejuvenation" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Facial<br>Rejuvenation</h3>
+          <p class="service-card__tagline">Look refreshed. Be you.</p>
+          <a href="treatments/face-care-rejuvenation.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
       <div class="service-card">
-        <img src="assets/img/mockup/service-2-breast.png" alt="Breast Surgery" class="service-card__image">
-        <h3 class="service-card__title">Breast<br>Surgery</h3>
-        <p class="service-card__tagline">Restoration and confidence.</p>
-        <a href="treatments/breast-surgery.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-2.jpg" alt="Breast Surgery" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Breast Surgery</h3>
+          <p class="service-card__tagline">Restoration &amp; confidence.</p>
+          <a href="treatments/breast-surgery.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
       <div class="service-card">
-        <img src="assets/img/mockup/service-3-body.png" alt="Body Contouring" class="service-card__image">
-        <h3 class="service-card__title">Body<br>Contouring</h3>
-        <p class="service-card__tagline">A stronger, more confident you.</p>
-        <a href="treatments.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-3.jpg" alt="Body Contouring" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Body Contouring</h3>
+          <p class="service-card__tagline">A stronger, more confident you.</p>
+          <a href="treatments.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
       <div class="service-card">
-        <img src="assets/img/mockup/service-4-reconstructive.png" alt="Reconstructive Surgery" class="service-card__image">
-        <h3 class="service-card__title">Reconstructive<br>Surgery</h3>
-        <p class="service-card__tagline">Healing beyond the surface.</p>
-        <a href="treatments/cancer-reconstruction-surgery.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-4.jpg" alt="Reconstructive Surgery" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Reconstructive<br>Surgery</h3>
+          <p class="service-card__tagline">Healing beyond the surface.</p>
+          <a href="treatments/cancer-reconstruction-surgery.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
       <div class="service-card">
-        <img src="assets/img/mockup/service-5-male.png" alt="Male Aesthetics" class="service-card__image">
-        <h3 class="service-card__title">Male<br>Aesthetics</h3>
-        <p class="service-card__tagline">Subtle changes. Stronger confidence.</p>
-        <a href="treatments.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-5.jpg" alt="Male Aesthetics" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Male Aesthetics</h3>
+          <p class="service-card__tagline">Subtle changes.<br>Stronger confidence.</p>
+          <a href="treatments.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
       <div class="service-card">
-        <img src="assets/img/mockup/service-6-nonsurgical.png" alt="Non-Surgical Aesthetics" class="service-card__image">
-        <h3 class="service-card__title">Non-Surgical<br>Aesthetics</h3>
-        <p class="service-card__tagline">Enhance. Preserve. Refresh.</p>
-        <a href="nonsurgical-treatments.html" class="service-card__link">Know More &rarr;</a>
+        <img src="assets/img/mockup-v3/service-6.jpg" alt="Non-Surgical Aesthetics" class="service-card__image">
+        <div class="service-card__body">
+          <h3 class="service-card__title">Non-Surgical<br>Aesthetics</h3>
+          <p class="service-card__tagline">Enhance. Preserve. Refresh.</p>
+          <a href="nonsurgical-treatments.html" class="text-link service-card__link"><span>Know More</span><span class="arr">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </div>
@@ -201,17 +237,17 @@
      ============================================ -->
 <section class="reconstructive" id="reconstructive">
   <div class="container reconstructive__container">
-    <div class="reconstructive__content">
-      <div class="section-tag"><span class="tag-bar"></span> RECONSTRUCTIVE SURGERY</div>
-      <h2 class="reconstructive__title">Restoring Function.<br><span class="title-gold"><em>Reclaiming Possibilities.</em></span></h2>
-      <p class="reconstructive__text">From cancer reconstruction to trauma repair, congenital conditions to post-surgical correction — we help you regain form, function and freedom.</p>
-      <a href="surgical-treatments.html" class="reconstructive__btn btn btn--primary">Explore Reconstructive Surgery &rarr;</a>
+    <div class="reconstructive__content bracket bracket--plain">
+      <div class="section-tag">RECONSTRUCTIVE SURGERY</div>
+      <h2 class="reconstructive__title">Restoring<br>Function.<br><span class="title-gold">Reclaiming Possibilities.</span></h2>
+      <p class="reconstructive__text">From cancer reconstruction to trauma repair, congenital<br class="br-d"> conditions to post-surgical correction — we help you<br class="br-d"> regain form, function and freedom.</p>
+      <a href="surgical-treatments.html" class="reconstructive__btn btn btn--primary">Explore Reconstructive Surgery <span class="arr">&rarr;</span></a>
     </div>
-    <div class="vertical-text" aria-hidden="true">
-      <span>HEALING</span>
-      <span>RESTORATION</span>
-      <span>RECONSTRUCTION</span>
-      <span>NEW BEGINNINGS</span>
+    <div class="side-words" aria-hidden="true">
+      <span>Healing</span>
+      <span>Restoration</span>
+      <span>Reconstruction</span>
+      <span>New Beginnings</span>
     </div>
   </div>
 </section>
@@ -220,24 +256,26 @@
      SECTION 6: MEET THE EXPERT
      ============================================ -->
 <section class="expert" id="expert">
-  <div class="container expert__container">
+  <div class="expert__container">
     <div class="expert__portrait">
-      <img src="assets/img/mockup/expert-dr-johar.png" alt="Dr. Manoj Johar">
+      <img src="assets/img/mockup-v3/expert-portrait.jpg" alt="Dr. Manoj Johar">
       <div class="expert__badge">
         <div class="expert__badge-number">25+</div>
-        <div class="expert__badge-text">Years of Clinical<br>Experience</div>
+        <div class="expert__badge-text">Years of Clinical Experience</div>
       </div>
     </div>
     <div class="expert__info">
-      <div class="section-tag"><span class="tag-bar"></span> MEET THE EXPERT</div>
+      <div class="section-tag">MEET THE EXPERT</div>
       <h2 class="expert__name">Dr. Manoj Johar</h2>
-      <p class="expert__role">Senior Consultant &mdash; Plastic, Reconstructive & Aesthetic Surgeon</p>
-      <p class="expert__bio">With over 25 years of experience, Dr. Manoj Johar is known for his surgical expertise, compassionate approach and commitment to patient-centred care. At KRTAM, he leads a multidisciplinary team dedicated to delivering safe, effective and natural-looking results.</p>
-      <a href="about.html" class="btn-outline-box">Know More About Dr. Manoj Johar &rarr;</a>
-      <div style="margin-top:14px;"><img src="assets/img/mockup/dr-johar-signature-transparent.png" alt="Dr. Manoj Johar signature" class="expert__signature"></div>
+      <p class="expert__role">Senior Consultant<br>Plastic, Reconstructive &amp; Aesthetic Surgeon</p>
+      <p class="expert__bio">With over 25 years of experience, Dr. Manoj Johar<br class="br-d"> is known for his surgical expertise, compassionate<br class="br-d"> approach and commitment to patient-centred care.<br class="br-d"> At KRTAM, he leads a multidisciplinary team dedicated<br class="br-d"> to delivering safe, effective and natural-looking results.</p>
+      <div class="expert__actions">
+        <a href="about.html" class="btn-outline-box">Know More About Dr. Manoj Johar <span class="arr">&rarr;</span></a>
+        <img src="assets/img/mockup-2x/dr-johar-signature-transparent.png" alt="Dr. Manoj Johar signature" class="expert__signature">
+      </div>
     </div>
     <div class="expert__quote">
-      <span class="expert__quote-mark">&ldquo;</span>
+      <span class="expert__quote-mark" aria-hidden="true">&ldquo;</span>
       <p>Surgery gives me the opportunity not just to change appearances, but to restore what matters most &mdash; confidence, dignity and a better quality of life.</p>
       <cite class="expert__quote-author">&mdash; DR. MANOJ JOHAR</cite>
     </div>
@@ -252,38 +290,35 @@
     <div class="stats__grid">
       <div class="stat">
         <div class="stat__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="23" cy="23" r="21"/><rect x="15" y="12" width="16" height="20" rx="1.500"/><circle cx="23" cy="20.500" r="3.500"/><path d="M19 28h8M18 35h10"/></svg>
         </div>
         <div class="stat__number">25+</div>
         <div class="stat__label">Years of Experience</div>
       </div>
       <div class="stat">
         <div class="stat__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 46 46" fill="currentColor"><circle cx="18" cy="14" r="6"/><path d="M6 36v-5a12 12 0 0 1 24 0v5z"/><circle cx="32" cy="17" r="4.500" opacity=".75"/><path d="M32.500 36v-5a14 14 0 0 0-2.600-8.100A9 9 0 0 1 41 31.500V36z" opacity=".75"/></svg>
         </div>
         <div class="stat__number">10,000+</div>
         <div class="stat__label">Happy Patients</div>
       </div>
-      <div class="stat">
+      <div class="stat stat--text">
         <div class="stat__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4.354a4 4 0 110 15.292M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M15 9h-3v3m0 0h3m-3 0v3"/></svg>
+          <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.400" stroke-linecap="round" stroke-linejoin="round"><circle cx="23" cy="23" r="21"/><circle cx="17.500" cy="18" r="3.500"/><circle cx="28.500" cy="18" r="3.500"/><path d="M10.500 32v-2a7 7 0 0 1 14 0v2M21.500 32v-2a7 7 0 0 1 14 0v2"/></svg>
         </div>
-        <div class="stat__number">Multidisciplinary</div>
-        <div class="stat__label">Team</div>
+        <div class="stat__label">Multidisciplinary<br>Team</div>
       </div>
-      <div class="stat">
+      <div class="stat stat--text">
         <div class="stat__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.400" stroke-linecap="round" stroke-linejoin="round"><circle cx="23" cy="23" r="21"/><path d="M14 33c2-9 8-16 18-20M17 14c5 3 10 9 12 19M13 23h6M27 31h6"/></svg>
         </div>
-        <div class="stat__number">Advanced Technology</div>
-        <div class="stat__label">& Safe Practices</div>
+        <div class="stat__label">Advanced Technology<br>&amp; Safe Practises</div>
       </div>
-      <div class="stat">
+      <div class="stat stat--text">
         <div class="stat__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.400" stroke-linecap="round" stroke-linejoin="round"><circle cx="23" cy="23" r="21"/><path d="M23 35s-8-8.300-8-14.500a8 8 0 0 1 16 0C31 26.700 23 35 23 35z"/><circle cx="23" cy="20.500" r="3"/></svg>
         </div>
-        <div class="stat__number">At Max Hospitals</div>
-        <div class="stat__label">(Delhi NCR)</div>
+        <div class="stat__label">At Max Hospitals<br>(Delhi NCR)</div>
       </div>
     </div>
   </div>
@@ -293,22 +328,22 @@
      SECTION 8: TEAM
      ============================================ -->
 <section class="team" id="team">
-  <div class="container team__container">
+  <div class="team__container">
     <div class="team__sidebar">
       <div class="section-tag"><span class="tag-bar"></span> A TEAM THAT CARES</div>
-      <h2 class="team__title">Skilled Hands.<br><span class="title-gold">Compassionate Hearts.</span></h2>
-      <p class="team__text">Our team of skilled surgeons, clinicians and support staff work together to deliver seamless, patient-first care.</p>
-      <a href="team.html" class="btn-outline-box">Meet Our Team &rarr;</a>
+      <h2 class="team__title">Skilled Hands.<br>Compassionate Hearts.</h2>
+      <p class="team__text">Our team of skilled surgeons, clinicians and support staff<br class="br-d"> work together to deliver seamless, patient-first care.</p>
+      <a href="team.html" class="btn-outline-box">Meet Our Team <span class="arr">&rarr;</span></a>
     </div>
     <div class="team__visual">
       <img src="assets/img/mockup/team-clinic-hires.jpg" alt="KRTAM Skin Clinic Team" class="team__photo">
     </div>
-    <div class="vertical-text" aria-hidden="true">
-      <span>EXPERIENCE</span>
-      <span>COLLABORATION</span>
-      <span>COMPASSION</span>
-      <span>A COMMON</span>
-      <span>PURPOSE.</span>
+    <div class="side-words" aria-hidden="true">
+      <span>Experience</span>
+      <span>Collaboration</span>
+      <span>Compassion</span>
+      <span>A Common</span>
+      <span>Purpose.</span>
     </div>
   </div>
 </section>
@@ -317,26 +352,28 @@
      SECTION 9: PATIENT STORIES
      ============================================ -->
 <section class="stories" id="stories">
-  <div class="container stories__container">
+  <div class="stories__container">
     <div class="stories__sidebar">
       <div class="section-tag"><span class="tag-bar"></span> PATIENT STORIES</div>
-      <h2 class="stories__title">Real People.<br><span class="title-gold">Real Transformations.</span></h2>
-      <p class="stories__text">Every patient's journey is a testament to the power of expert care and human connection.</p>
-      <a href="testimonials.html" class="btn-outline-box">View All Stories &rarr;</a>
+      <h2 class="stories__title">Real People.<br>Real Transformations.</h2>
+      <p class="stories__text">Every patient's journey is a testament to<br>the power of expert care and human connection.</p>
+      <a href="testimonials.html" class="btn-outline-box">View All Stories <span class="arr">&rarr;</span></a>
     </div>
     <div class="stories__carousel-wrap">
-      <button class="stories__arrow stories__arrow--prev" aria-label="Previous story">&lsaquo;</button>
+      <button class="stories__arrow stories__arrow--prev" aria-label="Previous story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
       <div class="stories__grid">
         <div class="story-card">
           <a href="https://youtu.be/qjWf7uwm02s?si=rDPRY6rY94yX_39r" target="_blank" rel="noopener" class="story-card__thumb-wrap">
             <img src="https://img.youtube.com/vi/qjWf7uwm02s/maxresdefault.jpg" alt="Breast Reconstruction" class="story-card__image">
             <div class="story-card__play">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
             </div>
           </a>
           <div class="story-card__body">
             <div class="story-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="10" r="6.500"/><circle cx="14" cy="10" r="2.500"/><path d="M9.500 15 6 25l8-4 8 4-3.500-10"/></svg>
             </div>
             <div class="story-card__meta">
               <div class="story-card__category">Breast Reconstruction &ndash;</div>
@@ -348,12 +385,12 @@
           <a href="https://youtu.be/R6inggloZRc?si=dSXk0CaCbjn5aC4G" target="_blank" rel="noopener" class="story-card__thumb-wrap">
             <img src="https://img.youtube.com/vi/R6inggloZRc/maxresdefault.jpg" alt="Reconstructive Surgery" class="story-card__image">
             <div class="story-card__play">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
             </div>
           </a>
           <div class="story-card__body">
             <div class="story-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.600"><circle cx="14" cy="14" r="11"/><circle cx="14" cy="14" r="5"/></svg>
             </div>
             <div class="story-card__meta">
               <div class="story-card__category">Reconstructive Surgery &ndash;</div>
@@ -365,12 +402,12 @@
           <a href="https://youtu.be/-ckc0orgMVo?si=8rozGWIr7h1JnKK4" target="_blank" rel="noopener" class="story-card__thumb-wrap">
             <img src="https://img.youtube.com/vi/-ckc0orgMVo/maxresdefault.jpg" alt="Patient Consultation" class="story-card__image">
             <div class="story-card__play">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
             </div>
           </a>
           <div class="story-card__body">
             <div class="story-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.600"><circle cx="14" cy="14" r="11"/><circle cx="14" cy="14" r="5"/></svg>
             </div>
             <div class="story-card__meta">
               <div class="story-card__category">Patient Consultation &ndash;</div>
@@ -379,7 +416,9 @@
           </div>
         </div>
       </div>
-      <button class="stories__arrow stories__arrow--next" aria-label="Next story">&rsaquo;</button>
+      <button class="stories__arrow stories__arrow--next" aria-label="Next story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -388,70 +427,47 @@
      SECTION 10: HOSPITAL LOCATIONS
      ============================================ -->
 <section class="locations" id="locations">
-  <div class="container locations__container">
+  <div class="locations__container">
     <div class="locations__sidebar">
       <div class="section-tag"><span class="tag-bar"></span> OUR LOCATIONS</div>
-      <h2 class="locations__title">At Max Hospitals,<br><span class="title-gold">Across Delhi NCR</span></h2>
+      <h2 class="locations__title">At Max Hospitals,<br>Across Delhi NCR</h2>
       <p class="locations__text">We are available at leading Max Hospitals to make world-class care accessible to you.</p>
-      <a href="contact.html" class="btn-outline-box">View All Locations &rarr;</a>
+      <a href="contact.html" class="btn-outline-box">View All Locations <span class="arr">&rarr;</span></a>
     </div>
-    <div class="locations__content-wrap">
-      <div class="locations__grid">
-        <div class="location-card">
-          <div class="location-card__thumb-wrap">
-            <img src="assets/img/mockup/hospital-saket.png" alt="Max Saket, Delhi" class="location-card__image">
-            <div class="location-card__thumb-pin">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-            </div>
+    <div class="locations__grid">
+      <div class="location-card">
+        <img src="assets/img/mockup-v3/hospital-saket.jpg" alt="Max Super Speciality Hospital, Saket" class="location-card__image">
+        <div class="location-card__body">
+          <div class="location-card__pin-icon">
+            <svg viewBox="0 0 20 26" fill="currentColor"><path d="M10 0C4.500 0 0 4.400 0 9.800 0 17.200 10 26 10 26s10-8.800 10-16.200C20 4.400 15.500 0 10 0zm0 13.500a3.700 3.700 0 1 1 0-7.400 3.700 3.700 0 0 1 0 7.400z"/></svg>
           </div>
-          <div class="location-card__body">
-            <div class="location-card__header">
-              <div class="location-card__pin-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-              </div>
-              <div class="location-card__name">
-                Max Super Speciality Hospital<br>Saket, Delhi
-              </div>
-            </div>
-            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Saket+Delhi" target="_blank" rel="noopener" class="location-card__link">Get Directions &rarr;</a>
+          <div>
+            <div class="location-card__name">Max Super Speciality Hospital<br>Saket, Delhi</div>
+            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Saket+Delhi" target="_blank" rel="noopener" class="text-link location-card__link"><span>Get Directions</span><span class="arr">&rarr;</span></a>
           </div>
         </div>
-        <div class="location-card">
-          <div class="location-card__thumb-wrap">
-            <img src="assets/img/mockup/hospital-noida.png" alt="Max Noida" class="location-card__image">
-            <div class="location-card__thumb-pin">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-            </div>
+      </div>
+      <div class="location-card">
+        <img src="assets/img/mockup-v3/hospital-noida.jpg" alt="Max Super Speciality Hospital, Noida" class="location-card__image">
+        <div class="location-card__body">
+          <div class="location-card__pin-icon">
+            <svg viewBox="0 0 20 26" fill="currentColor"><path d="M10 0C4.500 0 0 4.400 0 9.800 0 17.200 10 26 10 26s10-8.800 10-16.200C20 4.400 15.500 0 10 0zm0 13.500a3.700 3.700 0 1 1 0-7.400 3.700 3.700 0 0 1 0 7.400z"/></svg>
           </div>
-          <div class="location-card__body">
-            <div class="location-card__header">
-              <div class="location-card__pin-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-              </div>
-              <div class="location-card__name">
-                Max Super Speciality Hospital<br>Noida
-              </div>
-            </div>
-            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Noida" target="_blank" rel="noopener" class="location-card__link">Get Directions &rarr;</a>
+          <div>
+            <div class="location-card__name">Max Super Speciality Hospital<br>Noida</div>
+            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Noida" target="_blank" rel="noopener" class="text-link location-card__link"><span>Get Directions</span><span class="arr">&rarr;</span></a>
           </div>
         </div>
-        <div class="location-card">
-          <div class="location-card__thumb-wrap">
-            <img src="assets/img/mockup/hospital-patparganj.png" alt="Max Patparganj, Delhi" class="location-card__image">
-            <div class="location-card__thumb-pin">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-            </div>
+      </div>
+      <div class="location-card">
+        <img src="assets/img/mockup-v3/hospital-patparganj.jpg" alt="Max Super Speciality Hospital, Patparganj" class="location-card__image">
+        <div class="location-card__body">
+          <div class="location-card__pin-icon">
+            <svg viewBox="0 0 20 26" fill="currentColor"><path d="M10 0C4.500 0 0 4.400 0 9.800 0 17.200 10 26 10 26s10-8.800 10-16.200C20 4.400 15.500 0 10 0zm0 13.500a3.700 3.700 0 1 1 0-7.400 3.700 3.700 0 0 1 0 7.400z"/></svg>
           </div>
-          <div class="location-card__body">
-            <div class="location-card__header">
-              <div class="location-card__pin-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-              </div>
-              <div class="location-card__name">
-                Max Super Speciality Hospital<br>Patparganj, Delhi
-              </div>
-            </div>
-            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Patparganj+Delhi" target="_blank" rel="noopener" class="location-card__link">Get Directions &rarr;</a>
+          <div>
+            <div class="location-card__name">Max Super Speciality Hospital<br>Patparganj, Delhi</div>
+            <a href="https://maps.google.com/?q=Max+Super+Speciality+Hospital+Patparganj+Delhi" target="_blank" rel="noopener" class="text-link location-card__link"><span>Get Directions</span><span class="arr">&rarr;</span></a>
           </div>
         </div>
       </div>
@@ -460,60 +476,65 @@
 </section>
 
 <!-- ============================================
-     SECTION 11: DARK CTA BANNER (Exact Mockup Match)
+     SECTION 11: DARK CTA BANNER
      ============================================ -->
 <section class="cta-banner" id="ctaBanner">
-  <div class="container cta-banner__container">
-    <div class="cta-banner__left-space" aria-hidden="true"></div>
-    <div class="cta-banner__main">
-      <div class="cta-banner__content">
-        <p class="cta-banner__eyebrow">CONFIDENCE LOOKS GOOD ON YOU</p>
-        <h2 class="cta-banner__title">Let's Begin Your Journey</h2>
-        <p class="cta-banner__text">Book a consultation with Dr. Manoj Johar and his team<br>at KRTAM Skin Clinic. Together, we'll create a plan that's personal, precise and possible.</p>
-        <div class="cta-banner__bar">
-          <div class="cta-banner__features">
-            <div class="cta-banner__feature">
-              <div class="cta-banner__feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <span>Personalized Guidance</span>
+  <div class="cta-banner__container">
+    <div class="cta-banner__content">
+      <p class="cta-banner__eyebrow">CONFIDENCE LOOKS GOOD ON YOU</p>
+      <h2 class="cta-banner__title">Let's Begin Your Journey</h2>
+      <p class="cta-banner__text">Book a consultation with Dr. Manoj Johar and his team<br>at KRTAM Skin Clinic. Together, we'll create a plan that's personal, precise and possible.</p>
+      <div class="cta-banner__bar">
+        <div class="cta-banner__features">
+          <div class="cta-banner__feature">
+            <div class="cta-banner__feature-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="12" r="4.500"/><circle cx="9" cy="15" r="3.500"/><circle cx="31" cy="15" r="3.500"/><path d="M12 31v-3a8 8 0 0 1 16 0v3zM3 29v-2a6 6 0 0 1 8.500-5.500M37 29v-2a6 6 0 0 0-8.500-5.500M3 29h9M28 29h9"/></svg>
             </div>
-            <div class="cta-banner__divider" aria-hidden="true"></div>
-            <div class="cta-banner__feature">
-              <div class="cta-banner__feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-              </div>
-              <span>Clear Treatment Plans</span>
-            </div>
-            <div class="cta-banner__divider" aria-hidden="true"></div>
-            <div class="cta-banner__feature">
-              <div class="cta-banner__feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              </div>
-              <span>Compassionate Care</span>
-            </div>
+            <span>Personalized Guidance</span>
           </div>
-          <a href="appointments.html" class="cta-banner__btn">Book an Appointment &rarr;</a>
+          <div class="cta-banner__divider" aria-hidden="true"></div>
+          <div class="cta-banner__feature">
+            <div class="cta-banner__feature-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="22" r="13"/><circle cx="20" cy="22" r="5"/><path d="M15 6h10M20 6v3"/></svg>
+            </div>
+            <span>Clear Treatment Plans</span>
+          </div>
+          <div class="cta-banner__divider" aria-hidden="true"></div>
+          <div class="cta-banner__feature">
+            <div class="cta-banner__feature-icon">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="M20 34S5 25.500 5 15a8 8 0 0 1 15-3.800A8 8 0 0 1 35 15c0 10.500-15 19-15 19z"/><path d="M20 26s-6-3.600-6-7.600a3.200 3.200 0 0 1 6-1.600 3.200 3.200 0 0 1 6 1.600c0 4-6 7.600-6 7.600z"/></svg>
+            </div>
+            <span>Compassionate Care</span>
+          </div>
         </div>
+        <a href="appointments.html" class="cta-banner__btn">Book an Appointment <span class="arr">&rarr;</span></a>
       </div>
-      <div class="cta-banner__script-box" aria-hidden="true">
-        <img src="assets/img/mockup/a-brighter-you-transparent.png" alt="A Brighter You" class="cta-banner__script-img">
-      </div>
+    </div>
+    <div class="cta-banner__script" aria-hidden="true">
+      <span>A</span><span>Brighter</span><span>You</span>
     </div>
   </div>
 </section>
+
 <!-- ============================================
      SECTION 12: FOOTER
      ============================================ -->
 <footer class="site-footer" id="footer">
   <div class="container">
     <div class="site-footer__top">
-      <div class="site-footer__brand">
-        <img src="assets/img/mockup/krtam-logo-transparent.png" alt="KRTAM Skin Clinic" class="site-footer__logo">
-        <span class="site-footer__tagline">RECONSTRUCT · RESTORE · REDEFINE.</span>
-      </div>
+      <a href="index.html" class="brand site-footer__brand" aria-label="KRTAM Skin Clinic home">
+        <span class="brand__row">
+          <img src="assets/img/logo-emblem.png" alt="" class="brand__mark">
+          <span class="brand__text">
+            <span class="brand__name">KRTAM</span>
+            <span class="brand__sub">SKIN CLINIC</span>
+          </span>
+        </span>
+        <span class="brand__tagline">Reconstruct &bull; Restore &bull; Redefine.</span>
+      </a>
+      <span class="site-footer__divider" aria-hidden="true"></span>
       <nav class="site-footer__nav" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
+        <a href="index.html" class="is-active">Home</a>
         <a href="about.html">About</a>
         <a href="surgical-treatments.html">Reconstructive Surgery</a>
         <a href="treatments.html">Aesthetic Treatments</a>
@@ -522,11 +543,20 @@
         <a href="contact.html">Locations</a>
         <a href="contact.html">Contact</a>
       </nav>
+      <span class="site-footer__divider" aria-hidden="true"></span>
       <div class="site-footer__social">
-        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.500 22v-8.500h2.900l.450-3.400H13.500V8c0-1 .300-1.650 1.700-1.650h1.800V3.300A24 24 0 0 0 14.400 3.150c-2.600 0-4.400 1.600-4.400 4.500v2.450H7v3.400h3V22z"/></svg>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.500 7.200a2.800 2.800 0 0 0-2-2C18.800 4.750 12 4.750 12 4.750s-6.800 0-8.500.450a2.800 2.800 0 0 0-2 2C1.050 8.900 1.050 12 1.050 12s0 3.100.450 4.800a2.800 2.800 0 0 0 2 2c1.700.450 8.500.450 8.500.450s6.800 0 8.500-.450a2.800 2.800 0 0 0 2-2c.450-1.700.450-4.800.450-4.800s0-3.100-.450-4.800zM9.800 15.100V8.900l5.700 3.100z"/></svg>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.500 9h3.800v12H3.500zM5.400 3a2.200 2.200 0 1 1 0 4.400 2.200 2.200 0 0 1 0-4.400zM9.700 9h3.600v1.650h.050c.500-.950 1.750-1.950 3.600-1.950 3.850 0 4.550 2.500 4.550 5.800V21h-3.800v-5.750c0-1.400 0-3.150-1.900-3.150s-2.200 1.500-2.200 3.050V21H9.700z"/></svg>
+        </a>
       </div>
     </div>
     <div class="site-footer__bottom">
@@ -534,8 +564,8 @@
       <div class="site-footer__legal">
         <a href="privacy.html">Privacy Policy</a>
         <a href="disclaimer.html">Terms of Use</a>
+        <span>Care. Science. Confidence.</span>
       </div>
-      <p class="site-footer__motto">Care. Science. Confidence.</p>
     </div>
   </div>
 </footer>
